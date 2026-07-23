@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BeautyFort\BeautyfortProductImport\Console;
 
 use BeautyFort\BeautyfortProductImport\Model\WebsiteLogin;
+use BeautyFort\BeautyfortProductImport\Model\WebsiteSearch;
 use Magento\Framework\Console\Cli;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,15 +16,23 @@ class WebsiteLoginCommand extends Command
     /**
      * @var WebsiteLogin
      */
-    private WebsiteLogin $websiteLogin;
+    private $websiteLogin;
+
+    /**
+     * @var WebsiteSearch
+     */
+
+    private  $websiteSearch;
 
     public function __construct(
         WebsiteLogin $websiteLogin,
+        WebsiteSearch $websiteSearch,
         string $name = null
     ) {
         parent::__construct($name);
 
         $this->websiteLogin = $websiteLogin;
+        $this->websiteSearch = $websiteSearch;
     }
 
     protected function configure()
@@ -47,17 +56,25 @@ class WebsiteLoginCommand extends Command
 
         $success = $this->websiteLogin->login();
 
-        if ($success) {
-            $output->writeln('');
-            $output->writeln('<info>✓ Login successful</info>');
-            $output->writeln('<info>Cookie saved to var/beautyfort.cookies</info>');
-
-            return Cli::RETURN_SUCCESS;
+        if (!$success) {
+            $output->writeln('<error>Login failed.</error>');
+            return Command::FAILURE;
         }
 
+        $output->writeln('<info>✓ Login successful</info>');
         $output->writeln('');
-        $output->writeln('<error>✗ Login failed</error>');
 
-        return Cli::RETURN_FAILURE;
+        $output->writeln('Searching for SKU K230265...');
+
+        $previewId = $this->websiteSearch->findPreviewId('K230265');
+
+        if ($previewId) {
+            $output->writeln('<info>Preview ID: ' . $previewId . '</info>');
+        } else {
+            $output->writeln('<error>Preview ID not found.</error>');
+        }
+
+        return Command::SUCCESS;
+
     }
 }
