@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace BeautyFort\BeautyfortProductImport\Console;
 
+use BeautyFort\BeautyfortProductImport\Model\HighResImageService;
+
 use BeautyFort\BeautyfortProductImport\Model\WebsiteLogin;
 use BeautyFort\BeautyfortProductImport\Model\WebsiteSearch;
 use BeautyFort\BeautyfortProductImport\Model\PreviewParser;
-use BeautyFort\BeautyfortProductImport\Model\ImageDownloader;
 use Magento\Framework\Console\Cli;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,34 +22,20 @@ class WebsiteLoginCommand extends Command
     private $websiteLogin;
 
     /**
-     * @var WebsiteSearch
+     * @var HighResImageService
      */
-
-    private  $websiteSearch;
-
-    /**
-     * @var PreviewParser
-     */
-    private $previewParser;
-
-    /**
-     * @var ImageDownloader
-     */
-    private $imageDownloader;
+    private $highResImageService;
 
     public function __construct(
         WebsiteLogin $websiteLogin,
-        WebsiteSearch $websiteSearch,
-        PreviewParser $previewParser,
-        ImageDownloader $imageDownloader,
-        string $name = null
+        HighResImageService $highResImageService
     ) {
-        parent::__construct($name);
-
         $this->websiteLogin = $websiteLogin;
-        $this->websiteSearch = $websiteSearch;
-        $this->previewParser = $previewParser;
-        $this->imageDownloader = $imageDownloader;
+        $this->highResImageService = $highResImageService;
+
+
+        parent::__construct();  
+     
     }
 
     protected function configure()
@@ -62,66 +49,26 @@ class WebsiteLoginCommand extends Command
         OutputInterface $output
     ): int {
 
-        $output->writeln('');
-        $output->writeln('<info>========================================</info>');
-        $output->writeln('<info> BeautyFort Website Login Test </info>');
-        $output->writeln('<info>========================================</info>');
-        $output->writeln('');
+    $output->writeln('');
+    $output->writeln('<info>========================================</info>');
+    $output->writeln('<info> BeautyFort High Resolution Image Test </info>');
+    $output->writeln('<info>========================================</info>');
+    $output->writeln('');
 
-        $output->writeln('Attempting login...');
+    $output->writeln('Processing SKU K230265...');
+    $output->writeln('');
 
-        $success = $this->websiteLogin->login();
+    $file = $this->highResImageService->getImageForSku('K230265');
 
-        if (!$success) {
-            $output->writeln('<error>Login failed.</error>');
-            return Command::FAILURE;
-        }
+    if (!$file) {
+        $output->writeln('<error>High Resolution Image Not Found</error>');
+        return Command::FAILURE;
+    }
 
-        $output->writeln('<info>✓ Login successful</info>');
-        $output->writeln('');
+    $output->writeln('<info>✓ High Resolution Image Downloaded</info>');
+    $output->writeln($file);
 
-        $output->writeln('Searching for SKU K230265...');
-
-        $previewId = $this->websiteSearch->findPreviewId('K230265');
-
-        if ($previewId) {
-            $output->writeln('<info>Preview ID: ' . $previewId . '</info>');
-        } else {
-            $output->writeln('<error>Preview ID not found.</error>');
-        }
-
-        $output->writeln('');
-        $output->writeln('Downloading preview page...');
-
-        $imageUrl = $this->previewParser->getImageUrl($previewId);
-
-        if (!$imageUrl) {
-
-            $output->writeln('<error>No image URL found.</error>');
-
-            return Command::FAILURE;
-        }
-
-        $output->writeln('');
-        $output->writeln('Downloading high-resolution image...');
-
-        $file = $this->imageDownloader->download(
-            $imageUrl,
-            'K230265'
-        );
-
-        if ($file) {
-
-            $output->writeln('<info>Downloaded:</info>');
-            $output->writeln($file);
-
-        } else {
-
-            $output->writeln('<error>Download failed.</error>');
-
-        }
-
-        return Command::SUCCESS;
+    return Command::SUCCESS;
 
     }
 }
