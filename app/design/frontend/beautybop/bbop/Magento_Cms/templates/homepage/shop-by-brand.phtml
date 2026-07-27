@@ -1,13 +1,54 @@
  <!-- BRAND GRID -->
-    <section class="py-14">
-        <h2 class="text-4xl font-bold mb-6 text-center">
-            Shop by Brand
-        </h2>
+<section class="bb-categories py-16">
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <a href="/brands/hugo-boss-fragrance.html">Hugo Boss</a>
-            <a href="/brands/calvin-klein-fragrance.html">Calvin Klein</a>
-            <a href="/brands/prada-fragrance.html">Prada</a>
-            <a href="/brands/jean-paul-gaultier-fragrance.html">JPG</a>
+    <div class="max-w-[1440px] mx-auto px-4">
+ 
+        <div class="bb-categories__intro">
+
+            <?= $this->getLayout()
+                ->createBlock(\Magento\Cms\Block\Block::class)
+                ->setBlockId('bb-home-categories-brands-intro')
+                ->toHtml(); ?>
+
         </div>
-    </section>
+
+<div class="swiper bb-home-brands-slider-show">
+
+        <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+            <a href="/brands/hugo-boss-fragrance.html">
+           <img src="<?= $block->getViewFileUrl('images/icons/hugo-boss-icon.svg') ?>" alt="hugo boss perfumes"></a>
+        </div>
+
+        <div class="swiper-slide">  
+            <a href="/brands/prada-fragrance.html">
+            <img src="<?= $block->getViewFileUrl('images/icons/prada-icon.svg') ?>" alt="prada perfumes"></a>
+        </div>
+         <div class="swiper-slide">  
+             <a href="/brands/calvin-klein-fragrance.html">
+            <img src="<?= $block->getViewFileUrl('images/icons/calvin-klein-icon.svg') ?>" alt="calvin klein perfumes"></a>
+        </div>
+         <div class="swiper-slide">  
+            <a href="/brands/burberry-fragrance.html">
+            <img src="<?= $block->getViewFileUrl('images/icons/burberry-icon.svg') ?>" alt="burberry perfumes and aftershaves"></a>
+        </div>
+         <div class="swiper-slide">  
+           <a href="/brands/jean-paul-gaultier-fragrance.html">
+            <img src="<?= $block->getViewFileUrl('images/icons/jean-paul-gaultier-icon.svg') ?>" alt="jean paul gaultier perfumes"></a>
+        </div>
+        
+    </div>
+
+     <div class="swiper-pagination"></div>
+
+    <div class="swiper-button-prev"></div>
+
+    <div class="swiper-button-next"></div>
+
+</div>
+
+
+</div>
+
+</section>

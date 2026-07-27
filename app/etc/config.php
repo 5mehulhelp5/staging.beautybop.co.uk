@@ -329,6 +329,7 @@ return [
         'Magento_WishlistGraphQl' => 1,
         'Aitoc_TwoFactorAuthentication' => 0,
         'BeautyBop_Base' => 1,
+        'BeautyBop_Cookie' => 1,
         'BeautyBop_Core' => 1,
         'BeautyBop_Developer' => 1,
         'BeautyBop_Email' => 1,

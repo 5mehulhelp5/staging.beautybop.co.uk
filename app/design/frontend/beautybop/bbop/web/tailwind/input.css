@@ -19,6 +19,9 @@
 @import "./components/login-forms.css";
 @import "./components/footer.css";
 @import "./components/checkout/success.css";
+@import "./components/hero.css";
+@import "./components/mega-menu.css";
+@import "./pages/landing-pages.css";
 
 
 @tailwind base;
@@ -180,37 +183,6 @@ input[type="password"] {
     font-size: 11px;
     line-height: 18px;
 }
-
-
-/* Submenu (your actual class) */
-.navigation .level0.parent > ul.level0.level-top {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-45%);
-    width: 100%;
-    min-width: 1200px;
-
-    display: grid !important;
-    grid-template-columns: repeat(8, 1fr);
-
-    gap: 2px;
-    padding: 20px;
-    background: white;
-    color: black;
-    
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    z-index: 999;
-}
-
-/* SHOW ON HOVER */
-.navigation .level0.parent:hover > ul.level0.level-top {
-    opacity: 1;
-    visibility: visible;
-}
-
 
 
 .account-menu {
