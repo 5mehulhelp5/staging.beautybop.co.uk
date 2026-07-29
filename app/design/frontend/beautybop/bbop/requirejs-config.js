@@ -17,6 +17,8 @@ var config = {
         'js/homepage-carousel',
         'js/mobile-filter',
         'mage/tabs',
-        'mage/collapsible'
+        'mage/collapsible',
+        'js/desktop-filter',
+        'js/brand-faq'
     ]
 };

@@ -1,0 +1,254 @@
+<?php
+/**
+ * Reusable brand buying guide
+ *
+ * Data is supplied through layout XML using block arguments.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$brandName = (string) $block->getData('brand_name');
+$title = (string) $block->getData('title');
+$intro = (string) $block->getData('intro');
+
+$fragrances = $block->getData('fragrances') ?: [];
+$recommendations = $block->getData('recommendations') ?: [];
+
+$edtDescription = (string) $block->getData('edt_description');
+$edpDescription = (string) $block->getData('edp_description');
+
+if (!$title && $brandName) {
+    $title = __('%1 Fragrance Buying Guide', $brandName);
+}
+?>
+
+<?php if ($brandName): ?>
+<section class="brand-buying-guide"
+         aria-labelledby="brand-buying-guide-title">
+
+    <div class="brand-buying-guide__container">
+
+        <header class="brand-buying-guide__header">
+            <span class="brand-buying-guide__eyebrow">
+                <?= $escaper->escapeHtml(__('Fragrance Guide')) ?>
+            </span>
+
+            <h2 id="brand-buying-guide-title"
+                class="brand-buying-guide__title">
+                <?= $escaper->escapeHtml($title) ?>
+            </h2>
+
+            <?php if ($intro): ?>
+                <p class="brand-buying-guide__intro">
+                    <?= $escaper->escapeHtml($intro) ?>
+                </p>
+            <?php endif; ?>
+        </header>
+
+        <?php if (!empty($fragrances)): ?>
+            <div class="brand-buying-guide__section">
+                <h3>
+                    <?= $escaper->escapeHtml(
+                        __('Popular %1 Fragrances', $brandName)
+                    ) ?>
+                </h3>
+
+                <div class="brand-buying-guide__cards">
+                    <?php foreach ($fragrances as $fragrance): ?>
+                        <?php
+                        $name = isset($fragrance['name'])
+                            ? (string) $fragrance['name']
+                            : '';
+
+                        $description = isset($fragrance['description'])
+                            ? (string) $fragrance['description']
+                            : '';
+
+                        $bestFor = isset($fragrance['best_for'])
+                            ? (string) $fragrance['best_for']
+                            : '';
+
+                        $notes = isset($fragrance['notes'])
+                            ? (string) $fragrance['notes']
+                            : '';
+                        ?>
+
+                        <?php if ($name): ?>
+                            <article class="brand-buying-guide__card">
+                                <h4>
+                                    <?= $escaper->escapeHtml($name) ?>
+                                </h4>
+
+                                <?php if ($description): ?>
+                                    <p>
+                                        <?= $escaper->escapeHtml($description) ?>
+                                    </p>
+                                <?php endif; ?>
+
+                                <?php if ($bestFor): ?>
+                                    <p class="brand-buying-guide__detail">
+                                        <strong>
+                                            <?= $escaper->escapeHtml(
+                                                __('Best for:')
+                                            ) ?>
+                                        </strong>
+
+                                        <?= $escaper->escapeHtml($bestFor) ?>
+                                    </p>
+                                <?php endif; ?>
+
+                                <?php if ($notes): ?>
+                                    <p class="brand-buying-guide__detail">
+                                        <strong>
+                                            <?= $escaper->escapeHtml(
+                                                __('Key notes:')
+                                            ) ?>
+                                        </strong>
+
+                                        <?= $escaper->escapeHtml($notes) ?>
+                                    </p>
+                                <?php endif; ?>
+                            </article>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($recommendations)): ?>
+            <div class="brand-buying-guide__section">
+                <h3>
+                    <?= $escaper->escapeHtml(
+                        __('Choosing the Right %1 Fragrance', $brandName)
+                    ) ?>
+                </h3>
+
+                <div class="brand-buying-guide__table-wrapper">
+                    <table class="brand-buying-guide__table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <?= $escaper->escapeHtml(
+                                        __('Fragrance style')
+                                    ) ?>
+                                </th>
+
+                                <th scope="col">
+                                    <?= $escaper->escapeHtml(
+                                        __('Recommended range')
+                                    ) ?>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php foreach ($recommendations as $recommendation): ?>
+                                <?php
+                                $style = isset($recommendation['style'])
+                                    ? (string) $recommendation['style']
+                                    : '';
+
+                                $range = isset($recommendation['range'])
+                                    ? (string) $recommendation['range']
+                                    : '';
+                                ?>
+
+                                <?php if ($style && $range): ?>
+                                    <tr>
+                                        <td>
+                                            <?= $escaper->escapeHtml($style) ?>
+                                        </td>
+
+                                        <td>
+                                            <?= $escaper->escapeHtml($range) ?>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <div class="brand-buying-guide__section">
+            <h3>
+                <?= $escaper->escapeHtml(
+                    __('Eau de Toilette vs Eau de Parfum')
+                ) ?>
+            </h3>
+
+            <div class="brand-buying-guide__concentrations">
+                <article>
+                    <h4>
+                        <?= $escaper->escapeHtml(
+                            __('Eau de Toilette')
+                        ) ?>
+                    </h4>
+
+                    <p>
+                        <?= $escaper->escapeHtml(
+                            $edtDescription ?: __(
+                                'A lighter concentration suited to everyday and daytime wear.'
+                            )
+                        ) ?>
+                    </p>
+                </article>
+
+                <article>
+                    <h4>
+                        <?= $escaper->escapeHtml(
+                            __('Eau de Parfum')
+                        ) ?>
+                    </h4>
+
+                    <p>
+                        <?= $escaper->escapeHtml(
+                            $edpDescription ?: __(
+                                'A richer concentration that generally provides greater depth and longevity.'
+                            )
+                        ) ?>
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <div class="brand-buying-guide__section
+                    brand-buying-guide__why-shop">
+            <h3>
+                <?= $escaper->escapeHtml(
+                    __('Why Buy %1 Fragrance from Beauty Bop?', $brandName)
+                ) ?>
+            </h3>
+
+            <ul>
+                <li>
+                    <?= $escaper->escapeHtml(
+                        __('Genuine branded fragrances')
+                    ) ?>
+                </li>
+
+                <li>
+                    <?= $escaper->escapeHtml(
+                        __('Competitive UK prices')
+                    ) ?>
+                </li>
+
+                <li>
+                    <?= $escaper->escapeHtml(
+                        __('Fast UK delivery options')
+                    ) ?>
+                </li>
+
+                <li>
+                    <?= $escaper->escapeHtml(
+                        __('Secure online checkout')
+                    ) ?>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+<?php endif; ?>

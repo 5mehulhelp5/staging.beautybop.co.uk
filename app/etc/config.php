@@ -338,6 +338,7 @@ return [
         'Magecomp_Inventoryupdate' => 1,
         'CategoryDescription_CategoryLongDescription' => 1,
         'FME_Banners' => 1,
+        'FishPig_WordPress' => 1,
         'BeautyFort_BeautyfortProductImport' => 1,
         'Meetanshi_CookieNotice' => 1,
         'Meetanshi_Extensions' => 1,

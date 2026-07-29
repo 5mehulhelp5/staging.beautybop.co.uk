@@ -12,12 +12,17 @@
         <div class="bb-brand-hero__content">
 
             <span class="bb-brand-hero__eyebrow">
-                Hugo Boss
+                Hugo Boss The Brand 
             </span>
 
             <h1 class="bb-brand-hero__title">
-                Hugo Boss Fragrances
+                Hugo Boss
             </h1>
+
+            <p class="bb-brand-hero__sub_title">
+                Timeless Style
+                Refined Fragrances
+            </p>
 
             <p class="bb-brand-hero__description">
                 Discover iconic Hugo Boss aftershaves and perfumes,
@@ -28,7 +33,7 @@
                 <a
                     href="<?= $escaper->escapeUrl(
                         $block->getUrl(
-                            'brands/hugo-boss-fragrance/mens-fragrance.html'
+                            '/brands/hugo-boss-fragrance/mens-fragrance.html'
                         )
                     ) ?>"
                     class="bb-brand-hero__button"
@@ -37,7 +42,7 @@
                 </a>
 
                 <a
-                    href="#product-list"
+                    href="/brands/hugo-boss-fragrance.html"
                     class="bb-brand-hero__button bb-brand-hero__button--outline"
                 >
                     Shop All
@@ -47,18 +52,7 @@
         </div>
 
         <div class="bb-brand-hero__media">
-            <img
-                src="<?= $escaper->escapeUrl(
-                    $block->getViewFileUrl(
-                        'images/brands/hugo-boss/hugo-boss-lading-page-hero.png'
-                    )
-                ) ?>"
-                alt="<?= $escaper->escapeHtmlAttr(
-                    __('Hugo Boss fragrances')
-                ) ?>"
-                width="700"
-                height="650"
-            >
+           
         </div>
 
     </div>

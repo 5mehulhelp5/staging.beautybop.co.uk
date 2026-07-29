@@ -11,6 +11,7 @@
 @import "./components/slider.css";
 @import "./components//button.css";
 @import "./components/mobile-filter.css";
+@import "./components/desktop-filter.css";
 @import "./components/pagination.css";
 @import "./components/checkout/checkout-header.css";
 @import "./components/product-detail.css";
