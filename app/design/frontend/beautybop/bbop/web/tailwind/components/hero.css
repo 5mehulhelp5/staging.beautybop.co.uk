@@ -1,8 +1,28 @@
+.bb-home-hero-wrapper {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
+.bb-home-hero {
+    width: 100%;
+}
+
 .bb-home-hero {
     background: #f8f5f0;
     background-image:url('/media/home/background-image-hb.jpg'); 
     background-size: cover;
     background-position: center top;
+    min-height: 550px;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
+.bb-home-hero-slide-2 {
+    background: #f8f5f0;
+    background: url('../images/home/bg-banner-slide-2.jpg');
+    background-size: cover;
     min-height: 550px;
     display: flex;
     align-items: center;

@@ -1,16 +1,23 @@
 <div class="max-w-8xl mx-auto px-4">
+        
     <!-- HERO -->
     <?php
+
     echo $this->getLayout()
     ->createBlock(\Magento\Framework\View\Element\Template::class)
-    ->setTemplate('Magento_Cms::homepage/hero.phtml')
+    ->setTemplate('Magento_Cms::homepage/hero-slider.phtml')
     ->toHtml();
-    
-    echo $this->getLayout()
+
+     echo $this->getLayout()
     ->createBlock(\Magento\Framework\View\Element\Template::class)
     ->setTemplate('Magento_Cms::homepage/trust-bar.phtml')
-    ->toHtml(); 
+    ->toHtml();
 
+    echo $this->getLayout()
+    ->createBlock(\Magento\Framework\View\Element\Template::class)
+    ->setTemplate('Magento_Cms::homepage/shop-by-brand.phtml')
+    ->toHtml();
+    
     echo $this->getLayout()
     ->createBlock(\Magento\Framework\View\Element\Template::class)
     ->setTemplate('Magento_Cms::homepage/categories.phtml')
@@ -21,7 +28,6 @@
     ->setTemplate('Magento_Cms::homepage/best-selling-fragrances.phtml')
     ->toHtml();
 
-    
     
     ?>
 

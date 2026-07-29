@@ -6,10 +6,12 @@ use Magento\Catalog\Model\ProductFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use BeautyFort\BeautyfortProductImport\Helper\Api as ApiHelper;
 use BeautyFort\BeautyfortProductImport\Helper\Image;
+use BeautyFort\BeautyfortProductImport\Model\HighResImageService;
 use BeautyFort\BeautyfortProductImport\Helper\Price;
 use BeautyFort\BeautyfortProductImport\Helper\Content;
 use Magento\Framework\Filesystem;
 use Magento\Framework\App\Filesystem\DirectoryList;
+
 
 use BeautyFort\BeautyfortProductImport\Logger\Logger;
 
@@ -30,6 +32,9 @@ class BulkImporter
     /** @var Image */
     private $image;
 
+    /** @var HighResImageService */
+    private $highResImageService;
+
     /** @var Filesystem */
     private $filesystem;
 
@@ -47,6 +52,7 @@ class BulkImporter
         ApiHelper $apiHelper,
         Price $price,
         Image $image,
+        HighResImageService $highResImageService,
         Filesystem $filesystem,
         Content $content,
         Logger $logger
@@ -57,6 +63,7 @@ class BulkImporter
         $this->price = $price;
         $this->content = $content;
         $this->image = $image;
+        $this->highResImageService = $highResImageService;
         $this->filesystem = $filesystem;
         $this->logger = $logger;
     }
@@ -205,14 +212,38 @@ class BulkImporter
                 $this->productRepository->save($product);
 
                 /** Image */
-                $imageUrl = null;
+                $imageUrl = $this->highResImageService->getImageUrlForSku($sku);
 
-                if (!empty($item->HighResImageUrl)) {
-                    $imageUrl = $item->HighResImageUrl;
-                } elseif (!empty($item->MediumImageUrl)) {
-                    $imageUrl = $item->MediumImageUrl;
-                } elseif (!empty($item->ThumbnailImageUrl)) {
-                    $imageUrl = $item->ThumbnailImageUrl;
+                $this->logger->info('IMAGE SOURCE', [
+                    'sku' => $sku,
+                    'image_url' => $imageUrl
+                ]);
+
+                if ($imageUrl) {
+
+                    $this->logger->info(
+                        'Using BeautyFort website high-resolution image',
+                        [
+                            'sku' => $sku
+                        ]
+                    );
+
+                } else {
+
+                    $this->logger->info(
+                        'Falling back to SOAP image',
+                        [
+                            'sku' => $sku
+                        ]
+                    );
+
+                    if (!empty($item->HighResImageUrl)) {
+                        $imageUrl = $item->HighResImageUrl;
+                    } elseif (!empty($item->MediumImageUrl)) {
+                        $imageUrl = $item->MediumImageUrl;
+                    } elseif (!empty($item->ThumbnailImageUrl)) {
+                        $imageUrl = $item->ThumbnailImageUrl;
+                    }
                 }
 
                 if (!$imageUrl) {
@@ -232,6 +263,13 @@ class BulkImporter
                     $tmpFile = $mediaTmp . '/' . uniqid('bf_') . '.jpg';
 
                     $this->image->downloadAndResize($imageUrl, $tmpFile);
+
+                    $this->logger->info('Image downloaded', [
+                        'sku' => $sku,
+                        'tmp_file' => $tmpFile,
+                        'exists' => file_exists($tmpFile),
+                        'size' => file_exists($tmpFile) ? filesize($tmpFile) : 0
+                    ]);
 
                     if (file_exists($tmpFile) && filesize($tmpFile) > 0) {
 
@@ -309,7 +347,6 @@ class BulkImporter
             'shampoo',
             'conditioner',
             'deodorant',
-            'gift set',
             'body lotion',
             'body moisturiser',
             'body cream',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "08c22d8207b1c4c83422f9131c18cd89",
+    "content-hash": "ef9d1f768a3dbb2eee516875ffbf196d",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -1968,6 +1968,47 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.19.0"
             },
             "time": "2025-10-17T16:34:55+00:00"
+        },
+        {
+            "name": "fishpig/magento2-wordpress-integration",
+            "version": "3.32.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bentideswell/magento2-wordpress-integration.git",
+                "reference": "5353775533a8a4804efa0fc9a07352223849f00e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bentideswell/magento2-wordpress-integration/zipball/5353775533a8a4804efa0fc9a07352223849f00e",
+                "reference": "5353775533a8a4804efa0fc9a07352223849f00e",
+                "shasum": ""
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/module-config": "*",
+                "magento/module-sitemap": "^100.3",
+                "magento/module-store": "*",
+                "php": ">=7.4"
+            },
+            "suggest": {
+                "fishpig/magento2-wordpress-integration-yoastseo": "^3.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "FishPig\\WordPress\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Securely integrate WordPress and Magento 2.",
+            "support": {
+                "issues": "https://github.com/bentideswell/magento2-wordpress-integration/issues",
+                "source": "https://github.com/bentideswell/magento2-wordpress-integration/tree/3.32.3"
+            },
+            "time": "2026-07-01T11:05:16+00:00"
         },
         {
             "name": "google/recaptcha",
@@ -28085,10 +28126,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }

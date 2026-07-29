@@ -1,0 +1,520 @@
+.catalog-category-view .category-description h2 {
+    margin: 0 0 16px;
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #252525;
+}
+
+.catalog-category-view .category-description p {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: #444;
+}
+
+.catalog-category-view .category-description {
+    max-width: 1100px;
+    margin-bottom: 40px;
+}
+
+
+/*****************************************
+Hero image banner
+*****************************************/
+.bb-brand-hero {
+    background-color: #f3f0eb;
+    background-image:  url('../images/home/hugo-boss-landing-page-hero-bg.svg');
+    background-repeat: no-repeat;
+    background-position: 0px -252px;
+    background-size: cover;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
+@media (max-width: 1400px) {
+   .bb-brand-hero {
+        background-position: center;
+    }
+}
+
+.bb-brand-hero__inner {
+    width: min(100% - 40px, 1280px);
+    min-height: 580px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 60px;
+    padding: 0px 20px;
+}
+
+.bb-brand-hero__eyebrow,
+.bb-brand-section-heading__eyebrow {
+    display: block;
+    margin-bottom: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+.bb-brand-hero__title {
+    margin: 0 0 24px;
+    font-size: clamp(44px, 5vw, 58px);
+    line-height: 1.04;
+    font-weight: 400;
+    letter-spacing: -0.045em;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    text-transform: uppercase;
+}
+
+.bb-brand-hero__sub_title {
+    margin: 0 0 24px;
+    font-size: 23px;
+    line-height: 1.04;
+    font-weight: 200;
+    letter-spacing: -0.045em;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    text-transform: inherit;
+
+}
+
+.bb-brand-hero__description {
+    max-width: 610px;
+    margin: 0 0 32px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #a19b9b;
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+}
+
+.bb-brand-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.bb-brand-hero__button {
+    min-height: 50px;
+    padding: 0 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #191919;
+    border: 1px solid #191919;
+    color: #fff;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.bb-brand-hero__button:hover {
+    background: transparent;
+    color: #191919;
+}
+
+.bb-brand-hero__button--outline {
+    background: transparent;
+    color: #191919;
+}
+
+.bb-brand-hero__button--outline:hover {
+    background: #191919;
+    color: #fff;
+}
+
+.bb-brand-hero__media img {
+    display: block;
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.bb-brand-collections {
+    padding: 80px 0;
+}
+
+
+.bb-brand-container {
+    width: min(100% - 40px, 1400px);
+    margin: 0 auto;
+}
+
+.bb-brand-section-heading {
+    max-width: 720px;
+    margin-bottom: 40px;
+}
+
+.bb-brand-section-heading__title {
+    margin: 0 0 16px;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.15;
+    font-weight: 400;
+}
+
+.bb-brand-section-heading__description {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.bb-brand-collections__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.bb-brand-collection-card {
+    min-height: 425px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: #f5f5f5;
+    color: white;
+    text-decoration: none;
+}
+
+.bb-brand-collection-card:nth-child(1) {
+    background-image: url('../images/brands/hugo-boss/boss_bottled.svg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+}
+
+.bb-brand-collection-card:nth-child(2) {
+    background-image: url('../images/brands/hugo-boss/hugo_scent.svg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+}
+
+.bb-brand-collection-card:nth-child(3) {
+    background-image: url('../images/brands/hugo-boss/hugo_man.svg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+}
+
+.bb-brand-collection-card h3 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 400;
+
+}
+
+.catalog-category-view .brand-product-filters {
+    max-width: 1440px;
+    margin: 40px auto 20px;
+    padding: 0 24px;
+}
+
+@media (max-width: 767px) {
+    .catalog-category-view .brand-product-filters {
+        margin-top: 24px;
+        padding: 0 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bb-brand-hero__inner {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 32px;
+        padding: 45px 0;
+    }
+
+    .bb-brand-hero__title {
+        font-size: 44px;
+    }
+
+    .bb-brand-hero__media {
+        order: -1;
+    }
+
+    .bb-brand-collections {
+        padding: 55px 0;
+    }
+
+    .bb-brand-collections__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.sections.nav-sections {
+    display: none;
+}
+
+
+/**********************************
+Buying Guide CSS
+**********************************/
+
+.brand-buying-guide {
+    padding: 72px 24px;
+    background: #f7f6f3;
+}
+
+.brand-buying-guide__container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.brand-buying-guide__header {
+    max-width: 780px;
+    margin-bottom: 48px;
+}
+
+.brand-buying-guide__eyebrow {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.brand-buying-guide__title {
+    margin: 0 0 20px;
+    font-size: clamp(2.8rem, 4vw, 4.6rem);
+    line-height: 1.1;
+}
+
+.brand-buying-guide__intro {
+    margin: 0;
+    font-size: 1.7rem;
+    line-height: 1.7;
+}
+
+.brand-buying-guide__section + .brand-buying-guide__section {
+    margin-top: 56px;
+}
+
+.brand-buying-guide__section h3 {
+    margin: 0 0 24px;
+    font-size: 2.6rem;
+}
+
+.brand-buying-guide__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.brand-buying-guide__card {
+    padding: 28px;
+    background: #fff;
+    border: 1px solid #e7e4de;
+}
+
+.brand-buying-guide__card h4 {
+    margin: 0 0 14px;
+    font-size: 2rem;
+}
+
+.brand-buying-guide__card p {
+    line-height: 1.65;
+}
+
+.brand-buying-guide__detail {
+    margin-bottom: 0;
+}
+
+.brand-buying-guide__table-wrapper {
+    overflow-x: auto;
+    background: #fff;
+}
+
+.brand-buying-guide__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.brand-buying-guide__table th,
+.brand-buying-guide__table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: left;
+}
+
+.brand-buying-guide__table th {
+    font-weight: 700;
+    background: #efede8;
+}
+
+.brand-buying-guide__concentrations {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.brand-buying-guide__concentrations article {
+    padding: 28px;
+    background: #fff;
+    border: 1px solid #e7e4de;
+}
+
+.brand-buying-guide__concentrations h4 {
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+.brand-buying-guide__why-shop ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.brand-buying-guide__why-shop li {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e7e4de;
+    text-align: center;
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    .brand-buying-guide {
+        padding: 48px 20px;
+    }
+
+    .brand-buying-guide__cards,
+    .brand-buying-guide__concentrations,
+    .brand-buying-guide__why-shop ul {
+        grid-template-columns: 1fr;
+    }
+
+    .brand-buying-guide__section + .brand-buying-guide__section {
+        margin-top: 40px;
+    }
+
+    .brand-buying-guide__title {
+        font-size: 3rem;
+    }
+
+    .brand-buying-guide__section h3 {
+        font-size: 2.2rem;
+    }
+}
+
+/***************************************
+FAQ Accordion CSS
+***************************************/
+
+.brand-faq {
+    padding: 72px 24px;
+    background: #fff;
+}
+
+.brand-faq__container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.brand-faq__header {
+    max-width: 720px;
+    margin-bottom: 40px;
+}
+
+.brand-faq__eyebrow {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.brand-faq__title {
+    margin: 0 0 18px;
+    font-size: clamp(2.8rem, 4vw, 4.2rem);
+    line-height: 1.15;
+}
+
+.brand-faq__intro {
+    margin: 0;
+    font-size: 1.7rem;
+    line-height: 1.7;
+}
+
+.brand-faq__item {
+    border-top: 1px solid #ddd;
+}
+
+.brand-faq__item:last-child {
+    border-bottom: 1px solid #ddd;
+}
+
+.brand-faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 0;
+    cursor: pointer;
+    font-size: 1.8rem;
+    font-weight: 600;
+    list-style: none;
+}
+
+.brand-faq__question::-webkit-details-marker {
+    display: none;
+}
+
+.brand-faq__question::marker {
+    display: none;
+    content: '';
+}
+
+.brand-faq__icon {
+    flex: 0 0 auto;
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 0.25s ease;
+}
+
+.brand-faq__item[open] .brand-faq__icon {
+    transform: rotate(45deg);
+}
+
+.brand-faq__answer {
+    max-width: 780px;
+    padding: 0 48px 24px 0;
+}
+
+.brand-faq__answer p {
+    margin: 0;
+    font-size: 1.6rem;
+    line-height: 1.75;
+}
+
+@media (max-width: 767px) {
+    .brand-faq {
+        padding: 48px 20px;
+    }
+
+    .brand-faq__question {
+        padding: 20px 0;
+        font-size: 1.65rem;
+    }
+
+    .brand-faq__answer {
+        padding-right: 24px;
+    }
+}

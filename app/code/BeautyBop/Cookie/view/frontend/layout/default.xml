@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+
+        <referenceContainer name="before.body.end">
+
+            <block
+                class="BeautyBop\Cookie\Block\CookieBanner"
+                name="beautybop.cookie.banner"
+                template="BeautyBop_Cookie::cookie-banner.phtml"/>
+
+        </referenceContainer>
+
+    </body>
+
+</page>

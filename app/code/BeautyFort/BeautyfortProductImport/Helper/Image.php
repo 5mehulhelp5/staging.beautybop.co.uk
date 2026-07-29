@@ -33,7 +33,7 @@ class Image
         /*
          Target bottle size
         */
-        $targetHeight = 200;
+        $targetHeight = 300;
 
         $ratio = $srcWidth / $srcHeight;
 

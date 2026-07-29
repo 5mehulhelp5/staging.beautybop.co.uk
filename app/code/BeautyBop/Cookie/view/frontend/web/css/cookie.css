@@ -1,0 +1,266 @@
+.bb-cookie{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:flex-end;
+
+    padding:32px;
+
+    z-index:99999;
+
+    pointer-events:none;
+
+}
+
+.bb-cookie-card{
+
+    width:420px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:36px;
+
+    box-shadow:
+
+        0 20px 60px rgba(0,0,0,.15);
+
+    border:1px solid #ececec;
+
+    animation:cookieSlide .45s ease;
+
+    pointer-events:auto;
+
+}
+
+.bb-cookie-icon{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    background:#f6f6f6;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:24px;
+
+}
+
+.bb-cookie-icon svg{
+
+    width:30px;
+    height:30px;
+
+    display:block;
+
+    color:#111;
+
+    flex-shrink:0;
+
+}
+
+.bb-cookie-brand{
+
+    display:block;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:#888;
+
+    margin-bottom:10px;
+
+}
+
+.bb-cookie-card h2{
+
+    font-size:32px;
+
+    line-height:1.15;
+
+    margin:0 0 18px;
+
+    color:#111;
+
+    font-weight:700;
+
+}
+
+.bb-cookie-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+    margin-bottom:28px;
+
+}
+
+.bb-cookie-buttons{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.bb-cookie-btn{
+
+    width:100%;
+
+    height:54px;
+
+    border-radius:14px;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.bb-cookie-btn-primary{
+
+    background:#111;
+
+    color:#fff;
+
+}
+
+.bb-cookie-btn-primary:hover{
+
+    background:#333;
+
+}
+
+.bb-cookie-btn-secondary{
+
+    border:1px solid #ddd;
+
+    background:#fff;
+
+}
+
+.bb-cookie-btn-secondary:hover{
+
+    background:#f7f7f7;
+
+}
+
+.bb-cookie-link{
+
+    margin-top:20px;
+
+    font-weight:600;
+
+    color:#111;
+
+    transition:.25s;
+
+}
+
+.bb-cookie-link:hover{
+
+    opacity:.65;
+
+}
+
+.bb-cookie-hide{
+
+    animation:cookieHide .35s forwards;
+
+}
+
+@keyframes cookieSlide{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+@keyframes cookieHide{
+
+    to{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+.bb-cookie{
+
+    padding:16px;
+
+}
+
+.bb-cookie-card{
+
+    width:100%;
+
+    padding:24px;
+
+    border-radius:22px;
+
+}
+
+.bb-cookie-card h2{
+
+    font-size:24px;
+
+}
+
+.bb-cookie-card p{
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+.bb-cookie-btn{
+
+    height:50px;
+
+}
+
+}

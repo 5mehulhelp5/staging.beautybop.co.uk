@@ -29,6 +29,11 @@
                     BeautyFort\BeautyfortProductImport\Console\PriceUpdate
                 </item>
 
+                  <item name="beautyfort_website_login"
+                    xsi:type="object">
+                    BeautyFort\BeautyfortProductImport\Console\WebsiteLoginCommand
+                </item>
+
             </argument>
         </arguments>
     </type>

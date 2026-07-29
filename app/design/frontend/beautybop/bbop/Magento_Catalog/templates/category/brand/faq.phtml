@@ -1,0 +1,127 @@
+<?php
+/**
+ * Reusable brand FAQ accordion.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$brandName = trim((string) $block->getData('brand_name'));
+$title = trim((string) $block->getData('title'));
+$intro = trim((string) $block->getData('intro'));
+$faqs = $block->getData('faqs') ?: [];
+
+$validFaqs = [];
+
+foreach ($faqs as $faq) {
+    if (!is_array($faq)) {
+        continue;
+    }
+
+    $question = trim((string) ($faq['question'] ?? ''));
+    $answer = trim((string) ($faq['answer'] ?? ''));
+
+    if (!$question || !$answer) {
+        continue;
+    }
+
+    $validFaqs[] = [
+        'question' => $question,
+        'answer' => $answer
+    ];
+}
+
+if (!$validFaqs) {
+    echo '<!-- Brand FAQ not rendered: no valid FAQ data available -->';
+    return;
+}
+
+if (!$title) {
+    $title = $brandName
+        ? __('Frequently Asked Questions About %1 Fragrances', $brandName)
+        : __('Frequently Asked Questions');
+}
+
+$faqId = 'brand-faq-' . substr(
+    hash('sha256', $brandName . $title),
+    0,
+    10
+);
+
+$schema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'FAQPage',
+    'mainEntity' => []
+];
+
+foreach ($validFaqs as $faq) {
+    $schema['mainEntity'][] = [
+        '@type' => 'Question',
+        'name' => $faq['question'],
+        'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text' => $faq['answer']
+        ]
+    ];
+}
+?>
+
+<section class="brand-faq"
+         aria-labelledby="<?= $escaper->escapeHtmlAttr($faqId) ?>">
+
+    <div class="brand-faq__container">
+
+        <header class="brand-faq__header">
+            <span class="brand-faq__eyebrow">
+                <?= $escaper->escapeHtml(__('Need some help?')) ?>
+            </span>
+
+            <h2 id="<?= $escaper->escapeHtmlAttr($faqId) ?>"
+                class="brand-faq__title">
+                <?= $escaper->escapeHtml($title) ?>
+            </h2>
+
+            <?php if ($intro): ?>
+                <p class="brand-faq__intro">
+                    <?= $escaper->escapeHtml($intro) ?>
+                </p>
+            <?php endif; ?>
+        </header>
+
+        <div class="brand-faq__items">
+            <?php foreach ($validFaqs as $index => $faq): ?>
+                <details class="brand-faq__item">
+                    <summary class="brand-faq__question">
+                        <span>
+                            <?= $escaper->escapeHtml($faq['question']) ?>
+                        </span>
+
+                        <span class="brand-faq__icon"
+                              aria-hidden="true">
+                            +
+                        </span>
+                    </summary>
+
+                    <div class="brand-faq__answer">
+                        <p>
+                            <?= $escaper->escapeHtml($faq['answer']) ?>
+                        </p>
+                    </div>
+                </details>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
+</section>
+
+<script type="application/ld+json">
+<?= /* @noEscape */ json_encode(
+    $schema,
+    JSON_UNESCAPED_SLASHES |
+    JSON_UNESCAPED_UNICODE |
+    JSON_HEX_TAG |
+    JSON_HEX_AMP |
+    JSON_HEX_APOS |
+    JSON_HEX_QUOT
+) ?>
+</script>

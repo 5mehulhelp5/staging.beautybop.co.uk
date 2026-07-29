@@ -15,7 +15,7 @@
     grid-template-columns: repeat(8, 1fr);
 
     gap: 2px;
-    padding: 20px 40px;
+    padding: 20px 100px;
     background: white;
     color: black;
     
