@@ -1,0 +1,178 @@
+<?php
+/**
+ * BeautyBop FishPig comment form
+ *
+ * @var \FishPig\WordPress\Block\Post\View\Comment\Form $block
+ */
+?>
+
+<form
+    id="respond"
+    class="bb-comment-form"
+    method="post"
+    action="<?= $block->escapeUrl($block->getCommentFormAction()) ?>"
+>
+    <input
+        type="hidden"
+        name="comment_post_ID"
+        value="<?= (int) $block->getPostId() ?>"
+    >
+
+    <input
+        type="hidden"
+        name="comment_parent"
+        id="comment_parent"
+        value="<?= (int) $block->getRequest()->getParam('replytocom', 0) ?>"
+    >
+
+    <input
+        type="hidden"
+        name="redirect_to"
+        value="<?= $block->escapeUrl($block->getRedirectToUrl()) ?>"
+    >
+
+    <fieldset class="bb-comment-form__fieldset">
+        <legend class="bb-comment-form__legend">
+            <?= $block->escapeHtml(__('Leave a comment')) ?>
+        </legend>
+
+        <p class="bb-comment-form__intro">
+            <?= $block->escapeHtml(
+                __('Share your thoughts, questions or fragrance recommendations.')
+            ) ?>
+        </p>
+
+        <?php if ($block->customerMustLogin()): ?>
+            <div class="bb-comment-form__notice">
+                <?= $block->escapeHtml(
+                    __('You must be logged in to post a comment.')
+                ) ?>
+            </div>
+
+            <a
+                class="action primary bb-comment-form__login"
+                href="<?= $block->escapeUrl($block->getLoginLink()) ?>"
+            >
+                <span><?= $block->escapeHtml(__('Log in')) ?></span>
+            </a>
+        <?php else: ?>
+            <?php if (!$block->isCustomerLoggedIn()): ?>
+                <div class="bb-comment-form__row">
+                    <div class="field required bb-comment-form__field">
+                        <label for="author" class="label">
+                            <span><?= $block->escapeHtml(__('Name')) ?></span>
+                        </label>
+
+                        <div class="control">
+                            <input
+                                type="text"
+                                id="author"
+                                name="author"
+                                class="input-text required-entry"
+                                autocomplete="name"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="field required bb-comment-form__field">
+                        <label for="email" class="label">
+                            <span><?= $block->escapeHtml(__('Email')) ?></span>
+                        </label>
+
+                        <div class="control">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="input-text required-entry validate-email"
+                                autocomplete="email"
+                            >
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <input
+                    type="hidden"
+                    id="author"
+                    name="author"
+                    value="<?= $block->escapeHtmlAttr($block->getCustomerName()) ?>"
+                >
+
+                <input
+                    type="hidden"
+                    id="email"
+                    name="email"
+                    value="<?= $block->escapeHtmlAttr($block->getCustomerEmail()) ?>"
+                >
+            <?php endif; ?>
+
+            <div class="field bb-comment-form__field">
+                <label for="url" class="label">
+                    <span><?= $block->escapeHtml(__('Website')) ?></span>
+                    <span class="bb-comment-form__optional">
+                        <?= $block->escapeHtml(__('Optional')) ?>
+                    </span>
+                </label>
+
+                <div class="control">
+                    <input
+                        type="url"
+                        id="url"
+                        name="url"
+                        class="input-text"
+                        autocomplete="url"
+                    >
+                </div>
+            </div>
+
+            <div class="field required bb-comment-form__field">
+                <label for="comment" class="label">
+                    <span><?= $block->escapeHtml(__('Comment')) ?></span>
+                </label>
+
+                <div class="control">
+                    <textarea
+                        id="comment"
+                        name="comment"
+                        rows="7"
+                        class="required-entry"
+                    ></textarea>
+                </div>
+            </div>
+
+            <?= /* @noEscape */ $block->getChildHtml('before_form_end') ?>
+        <?php endif; ?>
+    </fieldset>
+
+    <?php if (!$block->customerMustLogin()): ?>
+        <div class="actions-toolbar bb-comment-form__actions">
+            <div class="primary">
+                <button
+                    type="submit"
+                    name="submit"
+                    class="action submit primary"
+                    value="<?= $block->escapeHtmlAttr(__('Post comment')) ?>"
+                    id="post-the-comment"
+                >
+                    <span><?= $block->escapeHtml(__('Post comment')) ?></span>
+                </button>
+            </div>
+
+            <span
+                class="please-wait"
+                id="respond-please-wait"
+                style="display: none;"
+            >
+                <?= $block->escapeHtml(__('Please wait...')) ?>
+            </span>
+        </div>
+    <?php endif; ?>
+</form>
+
+<script type="text/x-magento-init">
+{
+    "#respond": {
+        "validation": {}
+    }
+}
+</script>

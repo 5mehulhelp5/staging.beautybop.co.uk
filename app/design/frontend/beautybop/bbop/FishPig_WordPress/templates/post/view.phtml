@@ -1,0 +1,98 @@
+<?php
+/**
+ * BeautyBop FishPig single post template
+ *
+ * @var \FishPig\WordPress\Block\Post\View $block
+ */
+
+$post = $block->getPost();
+?>
+
+<?php if ($post): ?>
+    <?php if (!$post->isViewableForVisitor()): ?>
+        <div class="bb-article bb-article--protected">
+            <?= /* @noEscape */ $block->getPasswordProtectHtml() ?>
+        </div>
+    <?php else: ?>
+        <?php
+        $postUrl = $post->getUrl();
+        $postTitle = $post->getPostTitle();
+        $categoryString = null;
+        $imageUrl = null;
+
+        $taxonomy = $post->getSupportedTaxonomy('category')
+            ?: $post->getSupportedTaxonomy(null);
+
+        if ($taxonomy) {
+            $categoryString = $post->getTermCollectionAsString(
+                $taxonomy->getTaxonomy()
+            );
+        }
+
+        if ($image = $post->getImage()) {
+            $imageUrl = $image->getResizer()
+                ? $image->getResizer()
+                    ->constrainOnly(true)
+                    ->keepFrame(false)
+                    ->keepAspectRatio(true)
+                    ->resize(1400, null)
+                : $image->getImageUrl(['full', 'large']);
+        }
+        ?>
+
+        <article class="bb-article">
+            <header class="bb-article__header">
+                <div class="bb-article__meta">
+                    <?php if ($categoryString): ?>
+                        <span class="bb-article__category">
+                            <?= $block->escapeHtml($categoryString, ['a']) ?>
+                        </span>
+                    <?php endif; ?>
+
+                    <time class="bb-article__date">
+                        <?= $block->escapeHtml($post->getPostDate()) ?>
+                    </time>
+                </div>
+            </header>
+
+            <?php if ($imageUrl): ?>
+                <figure class="bb-article__hero">
+                    <img
+                        class="bb-article__hero-image"
+                        src="<?= $block->escapeUrl($imageUrl) ?>"
+                        alt="<?= $block->escapeHtmlAttr($postTitle) ?>"
+                    >
+                </figure>
+            <?php endif; ?>
+
+            <?php if (($content = trim($post->getContent())) !== ''): ?>
+                <div class="bb-article__content">
+                    <?= /* @noEscape */ $content ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($tagString = $post->getTermCollectionAsString('post_tag')): ?>
+                <footer class="bb-article__footer">
+                    <div class="bb-article__tags">
+                        <span class="bb-article__tags-label">
+                            <?= $block->escapeHtml(__('Tags:')) ?>
+                        </span>
+
+                        <?= $block->escapeHtml($tagString, ['a']) ?>
+                    </div>
+                </footer>
+            <?php endif; ?>
+
+            <div class="bb-article__back">
+                <a href="<?= $block->escapeUrl($block->getUrl('blog')) ?>">
+                    <span aria-hidden="true">←</span>
+                    <?= $block->escapeHtml(__('Back to Journal')) ?>
+                </a>
+            </div>
+
+            <div class="bb-article__comments">
+                <?= /* @noEscape */ $block->getChildHtml('comments') ?>
+            </div>
+        </article>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,100 @@
+<?php
+/**
+ * BeautyBop FishPig comments list
+ *
+ * @var \FishPig\WordPress\Block\Post\View\Comments $block
+ */
+
+$post = $block->getPost();
+$comments = $block->getComments();
+?>
+
+<?php if (count($comments) > 0): ?>
+    <?php if (!$block->getParentId()): ?>
+        <div class="bb-comments__heading">
+            <span class="bb-comments__eyebrow">
+                <?= $block->escapeHtml(__('Join the conversation')) ?>
+            </span>
+
+            <h2 class="bb-comments__title">
+                <?= $block->escapeHtml(
+                    count($comments) === 1
+                        ? __('1 Comment')
+                        : __('%1 Comments', count($comments))
+                ) ?>
+            </h2>
+        </div>
+    <?php endif; ?>
+
+    <ol class="bb-comment-list<?= $block->getParentId() ? ' bb-comment-list--children' : '' ?>">
+        <?php foreach ($comments as $comment): ?>
+            <li
+                class="bb-comment"
+                id="comment-<?= (int) $comment->getId() ?>"
+            >
+                <article class="bb-comment__card">
+                    <div class="bb-comment__header">
+                        <?php if ($avatarUrl = $comment->getAvatarUrl(75)): ?>
+                            <div class="bb-comment__avatar">
+                                <img
+                                    src="<?= $block->escapeUrl($avatarUrl) ?>"
+                                    alt="<?= $block->escapeHtmlAttr($comment->getCommentAuthor()) ?>"
+                                    loading="lazy"
+                                >
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="bb-comment__meta">
+                            <div class="bb-comment__author">
+                                <?php if ($comment->getCommentAuthorUrl() !== '#'): ?>
+                                    <a
+                                        href="<?= $block->escapeUrl($comment->getCommentAuthorUrl()) ?>"
+                                        rel="nofollow ugc"
+                                    >
+                                        <?= $block->escapeHtml($comment->getCommentAuthor()) ?>
+                                    </a>
+                                <?php else: ?>
+                                    <span>
+                                        <?= $block->escapeHtml($comment->getCommentAuthor()) ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+
+                            <a
+                                class="bb-comment__date"
+                                href="<?= $block->escapeUrl($comment->getUrl()) ?>"
+                                rel="nofollow"
+                            >
+                                <?= $block->escapeHtml(
+                                    __('%1 at %2', $comment->getCommentDate(), $comment->getCommentTime())
+                                ) ?>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bb-comment__content">
+                        <?= $block->escapeHtml(
+                            $block->getCommentContent($comment),
+                            ['br', 'a']
+                        ) ?>
+                    </div>
+
+                    <?php if ($block->canComment()): ?>
+                        <div class="bb-comment__reply">
+                            <a
+                                href="#respond"
+                                class="bb-comment__reply-link"
+                                onclick="document.getElementById('comment_parent').value=<?= (int) $comment->getId() ?>;"
+                            >
+                                <?= $block->escapeHtml(__('Reply')) ?>
+                                <span aria-hidden="true">↓</span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </article>
+
+                <?= /* @noEscape */ $block->getChildrenCommentsHtml($comment) ?>
+            </li>
+        <?php endforeach; ?>
+    </ol>
+<?php endif; ?>
