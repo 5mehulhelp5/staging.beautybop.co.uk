@@ -65,6 +65,11 @@ class PriceUpdater
             'count' => count($supplierProducts)
         ]);
 
+        if (empty($supplierProducts)) {
+            $this->logger->error('No supplier products returned. Aborting price update.');
+            return;
+        }
+
         $supplierLookup = [];
 
         foreach ($supplierProducts as $item) {
@@ -78,6 +83,10 @@ class PriceUpdater
 
         $this->logger->info('Supplier lookup built', [
             'count' => count($supplierLookup)
+        ]);
+
+        $this->logger->info('First supplier lookup keys', [
+            'keys' => array_slice(array_keys($supplierLookup), 0, 20)
         ]);
 
        
@@ -122,6 +131,10 @@ class PriceUpdater
                 $this->logger->info('Checking SKU', [
                 'sku' => $sku
                 ]);
+            $this->logger->info('Comparing', [
+                'magento_sku' => $sku,
+                'exists' => isset($supplierLookup[$sku])
+            ]);
 
             if (!isset($supplierLookup[$sku])) {
 
@@ -132,6 +145,8 @@ class PriceUpdater
 
                 continue;
             }
+
+   
 
             $supplierData = $supplierLookup[$sku];
 
@@ -196,13 +211,42 @@ class PriceUpdater
 
             if ($hasChanges) {
 
-                $this->logger->info('Saving product', [
-                    'sku' => $sku
-                ]);
+                    try {
 
-                $this->productRepository->save($product);
+                        $this->logger->info('Saving product', ['sku' => $sku]);
 
-                $updatedCount++;
+                        $product = $this->productRepository->get($sku);
+
+                        $product->setData('beautyfort_rrp', $newRrp);
+
+                        $product->setPrice($newPrice);
+
+                        $this->logger->info('Memory before save', [
+                            'memory' => memory_get_usage(true)
+                        ]);
+
+                        $this->productRepository->save($product);
+
+                        $this->logger->info('Memory after save', [
+                            'memory' => memory_get_usage(true)
+                        ]);
+
+                        $this->logger->info('After save', ['sku' => $sku]);
+
+                        $updatedCount++;
+
+                    } catch (\Throwable $e) {
+                        $errorCount++;
+
+                        $this->logger->error('Save failed', [
+                            'sku'     => $sku,
+                            'message' => $e->getMessage(),
+                            'trace'   => $e->getTraceAsString()
+                        ]);
+
+                        continue;
+                    }
+                
 
             } else {
 

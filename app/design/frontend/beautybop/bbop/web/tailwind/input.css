@@ -23,6 +23,9 @@
 @import "./components/hero.css";
 @import "./components/mega-menu.css";
 @import "./pages/landing-pages.css";
+@import "./components/blog/listing.css";
+@import "./components/blog/single.css";
+@import "./components/blog/form.css";
 
 
 @tailwind base;

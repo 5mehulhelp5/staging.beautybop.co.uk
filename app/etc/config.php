@@ -335,7 +335,7 @@ return [
         'BeautyBop_Email' => 1,
         'BeautyBop_FooterBlock' => 1,
         'BeautyBop_Qty' => 1,
-        'Magecomp_Inventoryupdate' => 1,
+        'Magecomp_Inventoryupdate' => 0,
         'CategoryDescription_CategoryLongDescription' => 1,
         'FME_Banners' => 1,
         'FishPig_WordPress' => 1,
