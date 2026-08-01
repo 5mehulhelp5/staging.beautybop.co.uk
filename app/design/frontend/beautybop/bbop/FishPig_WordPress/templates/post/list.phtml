@@ -1,0 +1,35 @@
+<?php
+/**
+ * BeautyBop FishPig post listing
+ *
+ * @var \FishPig\WordPress\Block\Post\ListPost $block
+ */
+
+$posts = $block->getPosts();
+?>
+
+<?php if (count($posts) > 0): ?>
+    <section class="bb-journal-list" aria-label="<?= $block->escapeHtmlAttr(__('Journal articles')) ?>">
+        <ol class="bb-journal-grid">
+            <?php foreach ($posts as $post): ?>
+                <?php $renderedPostHtml = $block->renderPost($post); ?>
+
+                <?php if ($renderedPostHtml): ?>
+                    <li class="bb-journal-grid__item<?= $post->isSticky() ? ' is-sticky' : '' ?>">
+                        <?= /* @noEscape */ $renderedPostHtml ?>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ol>
+
+        <?php if ($pagerHtml = $block->getPagerHtml()): ?>
+            <div class="bb-journal-pagination">
+                <?= /* @noEscape */ $pagerHtml ?>
+            </div>
+        <?php endif; ?>
+    </section>
+<?php else: ?>
+    <div class="bb-journal-empty">
+        <p><?= $block->escapeHtml(__('No journal articles are available yet.')) ?></p>
+    </div>
+<?php endif; ?>
