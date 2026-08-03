@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+
+    <default>
+
+        <payment>
+
+            <beautybop_paypal>
+
+                <active>1</active>
+
+                <title>PayPal</title>
+
+                <sort_order>10</sort_order>
+
+                <sandbox>1</sandbox>
+
+                <debug>1</debug>
+
+            </beautybop_paypal>
+
+        </payment>
+
+    </default>
+
+</config>

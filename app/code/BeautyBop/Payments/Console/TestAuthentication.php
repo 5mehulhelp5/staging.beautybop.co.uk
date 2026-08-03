@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BeautyBop\Payments\Console\Payments;
+namespace BeautyBop\Payments\Console;
 
 use BeautyBop\Payments\Service\PayPalAuthenticator;
 use Magento\Framework\Console\Cli;

@@ -4,10 +4,17 @@
 <type name="Magento\Framework\Console\CommandList">
     <arguments>
         <argument name="commands" xsi:type="array">
+
             <item name="beautybop_payments_test_auth"
                   xsi:type="object">
-                BeautyBop\Payments\Console\Payments\TestAuthentication
+                BeautyBop\Payments\Console\TestAuthentication
             </item>
+
+            <item name="beautybop_payments_test_order"
+                  xsi:type="object">
+                BeautyBop\Payments\Console\TestCreateOrder
+            </item>
+
         </argument>
     </arguments>
 </type>

@@ -48,14 +48,24 @@ class HttpClient
         );
     }
 
+   
+
     /**
      * Send POST request.
      */
     public function post(
         string $url,
-        array $payload = [],
+        mixed $payload = null,
         array $headers = []
     ): Response {
+
+        $this->logger->debug(
+            'POST Payload',
+            [
+                'url' => $url,
+                'payload' => json_encode($payload)
+            ]
+        );
 
         foreach ($headers as $key => $value) {
             $this->curl->addHeader($key, $value);
@@ -73,6 +83,11 @@ class HttpClient
                 'Accept',
                 'application/json'
             );
+        }
+
+        if ($payload === null) {
+
+            $payload = new \stdClass();
         }
 
         $this->curl->post(
