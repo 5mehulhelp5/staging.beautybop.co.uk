@@ -1,0 +1,9 @@
+var config = {
+
+    deps: [
+
+        'BeautyBop_Payments/js/view/payment/renderer-list'
+
+    ]
+
+};

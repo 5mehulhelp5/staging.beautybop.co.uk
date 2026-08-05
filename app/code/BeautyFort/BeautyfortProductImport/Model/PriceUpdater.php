@@ -7,6 +7,7 @@ use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use BeautyFort\BeautyfortProductImport\Helper\Api;
 use BeautyFort\BeautyfortProductImport\Helper\Price;
+use Magento\CatalogInventory\Api\StockRegistryInterface;
 use BeautyFort\BeautyfortProductImport\Logger\Logger;
 
 use Magento\Framework\App\State;
@@ -32,11 +33,15 @@ class PriceUpdater
     /** @var State */
     private $appState;
 
+    /** @var StockRegistryInterface */
+    private $stockRegistry;
+
     public function __construct(
         CollectionFactory $productCollectionFactory,
         ProductRepositoryInterface $productRepository,
         Api $api,
         Price $price,
+        StockRegistryInterface $stockRegistry,
         Logger $logger,
         State $appState
     ) {
@@ -44,6 +49,7 @@ class PriceUpdater
         $this->productRepository = $productRepository;
         $this->api = $api;
         $this->price = $price;
+        $this->stockRegistry = $stockRegistry;
         $this->logger = $logger;
         $this->appState = $appState;
     }
@@ -92,15 +98,10 @@ class PriceUpdater
        
 
         $updatedCount = 0;
-
-        /**
-         * OLD BULK FETCH
-         * 1️⃣ Temporarily disabled while migrating to SKU lookups
-         */
-
         $checkedCount = 0;
         $unchangedCount = 0;
         $errorCount = 0;
+        $stockUpdatedCount = 0;
    
 
         /**
@@ -127,136 +128,155 @@ class PriceUpdater
                     continue;
                 }*/
 
-                // Skip if supplier does not have this SKU
-                $this->logger->info('Checking SKU', [
-                'sku' => $sku
-                ]);
-            $this->logger->info('Comparing', [
-                'magento_sku' => $sku,
-                'exists' => isset($supplierLookup[$sku])
-            ]);
+                
+                if (!isset($supplierLookup[$sku])) {
 
-            if (!isset($supplierLookup[$sku])) {
+                    $this->logger->warning(
+                        'Supplier SKU not found',
+                        ['sku' => $sku]
+                    );
 
-                $this->logger->warning(
-                    'Supplier SKU not found',
-                    ['sku' => $sku]
-                );
-
-                continue;
-            }
+                    continue;
+                }
 
    
 
-            $supplierData = $supplierLookup[$sku];
+                $supplierData = $supplierLookup[$sku];
 
-            $this->logger->info('Supplier lookup hit', [
-                'sku'   => $sku,
-                'price' => $supplierData['Price'] ?? null,
-                'rrp'   => $supplierData['RRP'] ?? null,
-                'stock' => $supplierData['StockLevel'] ?? null,
-            ]);
+                $stockItem = $this->stockRegistry->getStockItemBySku($sku);
 
-            $checkedCount++;
+                $currentQty = (int)$stockItem->getQty();
+
+                $newQty = (int)($supplierData['StockLevel'] ?? 0);
+
+                $this->logger->info('Stock comparison', [
+                    'sku' => $sku,
+                    'current_qty' => $currentQty,
+                    'new_qty' => $newQty
+                ]);
+
+
+                $this->logger->info('Supplier lookup hit', [
+                    'sku'   => $sku,
+                    'price' => $supplierData['Price'] ?? null,
+                    'rrp'   => $supplierData['RRP'] ?? null,
+                    'stock' => $supplierData['StockLevel'] ?? null,
+                ]);
+
+                $checkedCount++;
 
             
-            $oldPrice = (float)$product->getPrice();
-            $supplierCost = (float)($supplierData['Price'] ?? 0);
+                $oldPrice = (float)$product->getPrice();
+                $supplierCost = (float)($supplierData['Price'] ?? 0);
 
-            $newPrice = $this->price->calculatePrice($supplierCost);
+                $newPrice = $this->price->calculatePrice($supplierCost);
 
-            $currentRrp = (float) $product->getData('beautyfort_rrp');
-            $newRrp = (float) ($supplierData['RRP'] ?? 0);
+                $currentRrp = (float) $product->getData('beautyfort_rrp');
+                $newRrp = (float) ($supplierData['RRP'] ?? 0);
 
-            $this->logger->info('RRP comparison', [
-                'sku'         => $sku,
-                'current_rrp' => $currentRrp,
-                'new_rrp'     => $newRrp
-            ]);
-
-            $hasChanges = false;
-
-            if ($currentRrp != $newRrp) {
-
-                $product->setData('beautyfort_rrp', $newRrp);
-
-                $hasChanges = true;
-
-                $this->logger->info('RRP changed', [
-                    'sku' => $sku,
-                    'old' => $currentRrp,
-                    'new' => $newRrp
+                $this->logger->info('RRP comparison', [
+                    'sku'         => $sku,
+                    'current_rrp' => $currentRrp,
+                    'new_rrp'     => $newRrp
                 ]);
-            }
 
-            $this->logger->info('Price comparison', [
-                'sku' => $sku,
-                'old_price' => $oldPrice,
-                'new_price' => $newPrice
-            ]);
+                $hasChanges = false;
 
-            if ($newPrice != $oldPrice) {
+                if ($currentRrp != $newRrp) {
 
-                $product->setPrice($newPrice);
+                    $product->setData('beautyfort_rrp', $newRrp);
 
-                $hasChanges = true;
+                    $hasChanges = true;
 
-                $this->logger->info('Price changed', [
+                    $this->logger->info('RRP changed', [
+                        'sku' => $sku,
+                        'old' => $currentRrp,
+                        'new' => $newRrp
+                    ]);
+                }
+
+                $this->logger->info('Price comparison', [
                     'sku' => $sku,
                     'old_price' => $oldPrice,
                     'new_price' => $newPrice
                 ]);
-            } 
+
+                if ($newPrice != $oldPrice) {
+
+                    $product->setPrice($newPrice);
+
+                    $hasChanges = true;
+
+                    $this->logger->info('Price changed', [
+                        'sku' => $sku,
+                        'old_price' => $oldPrice,
+                        'new_price' => $newPrice
+                    ]);
+                } 
 
 
-            if ($hasChanges) {
+                if ($currentQty != $newQty) {
+                    $hasChanges = true;
+                }
 
-                    try {
+                if ($hasChanges) {
 
-                        $this->logger->info('Saving product', ['sku' => $sku]);
+                        try {
 
-                        $product = $this->productRepository->get($sku);
+                            $this->logger->info('Saving product', ['sku' => $sku]);
 
-                        $product->setData('beautyfort_rrp', $newRrp);
+                            $product = $this->productRepository->get($sku);
 
-                        $product->setPrice($newPrice);
+                            $product->setPrice($newPrice);
 
-                        $this->logger->info('Memory before save', [
-                            'memory' => memory_get_usage(true)
-                        ]);
+                            $product->setData('beautyfort_rrp', $newRrp);
 
-                        $this->productRepository->save($product);
+                            $this->productRepository->save($product);
 
-                        $this->logger->info('Memory after save', [
-                            'memory' => memory_get_usage(true)
-                        ]);
+                            // update stock if different
+                            if ($currentQty != $newQty) {
 
-                        $this->logger->info('After save', ['sku' => $sku]);
+                                $stockItem->setQty($newQty);
+                                $stockItem->setIsInStock($newQty > 0);
 
-                        $updatedCount++;
+                                $this->stockRegistry->updateStockItemBySku(
+                                    $sku,
+                                    $stockItem
+                                );
 
-                    } catch (\Throwable $e) {
-                        $errorCount++;
+                                $this->logger->info('Stock changed', [
+                                    'sku' => $sku,
+                                    'old_qty' => $currentQty,
+                                    'new_qty' => $newQty
+                                ]);
 
-                        $this->logger->error('Save failed', [
-                            'sku'     => $sku,
-                            'message' => $e->getMessage(),
-                            'trace'   => $e->getTraceAsString()
-                        ]);
+                                $stockUpdatedCount++;
+                            }
 
-                        continue;
-                    }
-                
+                            $updatedCount++;
 
-            } else {
+                        } catch (\Throwable $e) {
+                            $errorCount++;
 
-                $unchangedCount++;
+                            $this->logger->error('Save failed', [
+                                'sku'     => $sku,
+                                'message' => $e->getMessage(),
+                                'trace'   => $e->getTraceAsString()
+                            ]);
 
-                $this->logger->info('Product unchanged', [
-                    'sku' => $sku
-                ]);
+                            continue;
+                        }
+                    
 
-            }
+                } else {
+
+                    $unchangedCount++;
+
+                    $this->logger->info('Product unchanged', [
+                        'sku' => $sku
+                    ]);
+
+                }
 
             } catch (\Throwable $e) {
 
@@ -267,13 +287,14 @@ class PriceUpdater
                     'error' => $e->getMessage(),
                     'trace' => $e->getTraceAsString()
                 ]);
-                            }
+            }
         }
 
         $this->logger->info('✅ PRICE CRON SUMMARY', [
 
             'checked'   => $checkedCount,
             'updated'   => $updatedCount,
+            'stock_updated' => $stockUpdatedCount,
             'unchanged' => $unchangedCount,
             'errors'    => $errorCount
 

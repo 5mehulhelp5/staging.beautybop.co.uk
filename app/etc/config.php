@@ -334,6 +334,7 @@ return [
         'BeautyBop_Developer' => 1,
         'BeautyBop_Email' => 1,
         'BeautyBop_FooterBlock' => 1,
+        'BeautyBop_Payments' => 0,
         'BeautyBop_Qty' => 1,
         'Magecomp_Inventoryupdate' => 0,
         'CategoryDescription_CategoryLongDescription' => 1,
