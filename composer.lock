@@ -165,16 +165,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.390.2",
+            "version": "3.390.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a09e95bf062e15b7343f9c1362fd45c7a0dec39b"
+                "reference": "51115bd27065e978c2a4cf297f8280d8c39e83da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a09e95bf062e15b7343f9c1362fd45c7a0dec39b",
-                "reference": "a09e95bf062e15b7343f9c1362fd45c7a0dec39b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/51115bd27065e978c2a4cf297f8280d8c39e83da",
+                "reference": "51115bd27065e978c2a4cf297f8280d8c39e83da",
                 "shasum": ""
             },
             "require": {
@@ -256,9 +256,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.390.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.390.4"
             },
-            "time": "2026-07-31T18:06:07+00:00"
+            "time": "2026-08-04T18:52:58+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -17537,16 +17537,16 @@
         },
         {
             "name": "magento/zend-db",
-            "version": "1.16.3",
+            "version": "1.16.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/magento/magento-zend-db.git",
-                "reference": "aefb2019b0eb8423ee05c9e4008360e8dd0497f9"
+                "reference": "f113209270c700bebaae05480dddcd05a542c9d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/magento/magento-zend-db/zipball/aefb2019b0eb8423ee05c9e4008360e8dd0497f9",
-                "reference": "aefb2019b0eb8423ee05c9e4008360e8dd0497f9",
+                "url": "https://api.github.com/repos/magento/magento-zend-db/zipball/f113209270c700bebaae05480dddcd05a542c9d1",
+                "reference": "f113209270c700bebaae05480dddcd05a542c9d1",
                 "shasum": ""
             },
             "require": {
@@ -17583,9 +17583,9 @@
             ],
             "support": {
                 "issues": "https://github.com/magento/magento-zend-db/issues",
-                "source": "https://github.com/magento/magento-zend-db/tree/1.16.3"
+                "source": "https://github.com/magento/magento-zend-db/tree/1.16.4"
             },
-            "time": "2025-12-22T11:59:33+00:00"
+            "time": "2026-08-03T11:45:35+00:00"
         },
         {
             "name": "magento/zend-exception",
@@ -17793,16 +17793,16 @@
         },
         {
             "name": "magento/zend-pdf",
-            "version": "1.16.6",
+            "version": "1.16.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/magento/magento-zend-pdf.git",
-                "reference": "26a51f45b09be173447f5957254311bdda5c4a8a"
+                "reference": "3c1bc0e69c15666c29b202c37e0bd5897f4db69e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/magento/magento-zend-pdf/zipball/26a51f45b09be173447f5957254311bdda5c4a8a",
-                "reference": "26a51f45b09be173447f5957254311bdda5c4a8a",
+                "url": "https://api.github.com/repos/magento/magento-zend-pdf/zipball/3c1bc0e69c15666c29b202c37e0bd5897f4db69e",
+                "reference": "3c1bc0e69c15666c29b202c37e0bd5897f4db69e",
                 "shasum": ""
             },
             "require": {
@@ -17844,9 +17844,9 @@
             ],
             "support": {
                 "issues": "https://github.com/magento/magento-zend-pdf/issues",
-                "source": "https://github.com/magento/magento-zend-pdf/tree/1.16.6"
+                "source": "https://github.com/magento/magento-zend-pdf/tree/1.16.7"
             },
-            "time": "2025-12-11T10:52:59+00:00"
+            "time": "2026-08-03T08:38:57+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -18848,16 +18848,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.55",
+            "version": "3.0.56",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "db9744e6d47e742b1f974e965ad49bdd041105af"
+                "reference": "7adbbe38cde25e2df2116dbf2673c407e24fa305"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/db9744e6d47e742b1f974e965ad49bdd041105af",
-                "reference": "db9744e6d47e742b1f974e965ad49bdd041105af",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/7adbbe38cde25e2df2116dbf2673c407e24fa305",
+                "reference": "7adbbe38cde25e2df2116dbf2673c407e24fa305",
                 "shasum": ""
             },
             "require": {
@@ -18938,7 +18938,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.55"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.56"
             },
             "funding": [
                 {
@@ -18954,7 +18954,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-14T23:24:10+00:00"
+            "time": "2026-08-03T04:36:50+00:00"
         },
         {
             "name": "psr/cache",
