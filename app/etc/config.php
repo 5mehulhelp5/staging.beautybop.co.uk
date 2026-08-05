@@ -346,6 +346,7 @@ return [
         'OlegKoval_RegenerateUrlRewrites' => 1,
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
+        'PayPal_PPCP' => 1,
         'SY_Slider' => 1,
         'Sparsh_Banner' => 0,
         'StripeIntegration_Tax' => 1,
