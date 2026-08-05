@@ -1,0 +1,22 @@
+define([
+    'uiRegistry'
+], function (registry) {
+    'use strict';
+
+    registry.async('checkout.steps.billing-step.payment.renders')(
+        function (renders) {
+
+            renders.push({
+
+                type: 'beautybop_paypal',
+
+                component:
+                    'BeautyBop_Payments/js/view/payment/method-renderer/paypal'
+
+            });
+
+        }
+    );
+
+    return {};
+});

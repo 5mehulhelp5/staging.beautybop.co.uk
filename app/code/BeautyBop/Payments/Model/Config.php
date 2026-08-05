@@ -21,8 +21,16 @@ class Config
     private const XML_PATH_SECRET =
         'beautybop_payments/paypal/secret';
 
-    /** @var ScopeConfigInterface; */
-    private $scopeConfig;
+    private const XML_PATH_TITLE =
+    'payment/beautybop_paypal/title';
+
+    private const XML_PATH_DEBUG =
+    'beautybop_payments/general/debug';
+
+     /**
+     * @var ScopeConfigInterface
+     */
+    private ScopeConfigInterface $scopeConfig;
 
 
     public function __construct(
@@ -37,7 +45,7 @@ class Config
      */
     public function isEnabled(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
+        return $this->scopeConfig->isSetFlag(
             self::XML_PATH_ENABLED,
             ScopeInterface::SCOPE_STORE
         );
@@ -49,8 +57,8 @@ class Config
      */
     public function isSandbox(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            self::XML_PATH_SANDBOX,
+        return $this->scopeConfig->isSetFlag(
+           self::XML_PATH_SANDBOX,
             ScopeInterface::SCOPE_STORE
         );
     }
@@ -75,6 +83,29 @@ class Config
     {
         return (string)$this->scopeConfig->getValue(
             self::XML_PATH_SECRET,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+
+    /**
+     * Get payment title.
+     */
+    public function getTitle(): string
+    {
+        return (string)$this->scopeConfig->getValue(
+            self::XML_PATH_TITLE,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Check if debug logging is enabled.
+     */
+    public function isDebugEnabled(): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_DEBUG,
             ScopeInterface::SCOPE_STORE
         );
     }
