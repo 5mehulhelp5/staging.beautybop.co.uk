@@ -28,12 +28,19 @@
     ->setTemplate('Magento_Cms::homepage/best-selling-fragrances.phtml')
     ->toHtml();
 
+    echo $this->getLayout()
+    ->createBlock(\Magento\Framework\View\Element\Template::class)
+    ->setTemplate('Magento_Cms::homepage/smell-good.phtml')
+    ->toHtml();
+
+    echo $this->getLayout()
+    ->createBlock(\Magento\Framework\View\Element\Template::class)
+    ->setTemplate('Magento_Cms::homepage/makeup-products.phtml')
+    ->toHtml();
+
     
     ?>
 
-    
-
-   
 
 </div>
 

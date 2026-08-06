@@ -26,6 +26,7 @@
 @import "./components/blog/listing.css";
 @import "./components/blog/single.css";
 @import "./components/blog/form.css";
+@import "./pages/homepage.css";
 
 
 @tailwind base;

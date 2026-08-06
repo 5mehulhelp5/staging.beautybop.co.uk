@@ -1,0 +1,40 @@
+.bb-smell-good-container p {
+    padding-bottom: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+}
+
+.bb-makeup-products-container {
+    margin-left: calc(50% - 50vw);
+    @apply bg-[#F6F7F8] h-[472px];
+}
+
+.bb-makeup-container {
+    @apply grid grid-cols-2 max-w-[1280px] ml-auto mr-auto h-[100%];
+}
+
+.bb-makeup-eyes {
+    @apply h-[100%] flex flex-col justify-center items-center pt-[16px] px-[70px];
+}
+
+.bb-makeup-eyes h3 {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom: 27px;
+}
+
+.bb-makeup-eyes .subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.bb-makeup-image {
+    background-image: url(../images/home/makeup-products-banner.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+    
