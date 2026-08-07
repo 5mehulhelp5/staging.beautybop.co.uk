@@ -1,0 +1,88 @@
+<?php
+/** @var \BeautyBop\Core\Block\Homepage\LatestPosts $block */
+
+$posts = $block->getLatestPosts(3);
+?>
+<section class="bb-home-blog">
+    <div class="bb-home-blog__inner">
+
+        <header class="bb-home-blog__header">
+            <h2>Latest Articles</h2>
+        </header>
+
+        <div class="bb-home-blog__grid">
+
+            <?php foreach ($posts as $post): ?>
+
+                <?php
+                $postName = $post->getName();
+                $postUrl  = $post->getUrl();
+
+                $imageUrl = null;
+
+                if ($image = $post->getImage()) {
+                    $imageUrl = $image->getResizer()
+                        ? $image->getResizer()
+                            ->constrainOnly(true)
+                            ->keepFrame(false)
+                            ->keepAspectRatio(true)
+                            ->resize(700, 420)
+                        : $image->getImageUrl(['large', 'medium']);
+                }
+                ?>
+
+                <article class="bb-home-blog-card">
+
+                    <?php if ($imageUrl): ?>
+                        <a
+                            href="<?= $block->escapeUrl($postUrl) ?>"
+                            class="bb-home-blog-card__image"
+                            aria-label="<?= $block->escapeHtmlAttr(__('Read %1', $postName)) ?>"
+                        >
+                            <img
+                                src="<?= $block->escapeUrl($imageUrl) ?>"
+                                alt="<?= $block->escapeHtmlAttr($postName) ?>"
+                                loading="lazy"
+                                width="700"
+                                height="420"
+                            >
+                        </a>
+                    <?php endif; ?>
+
+                    <div class="bb-home-blog-card__content">
+
+                        <h3>
+                            <a href="<?= $block->escapeUrl($postUrl) ?>">
+                                <?= $block->escapeHtml($postName) ?>
+                            </a>
+                        </h3>
+
+                        <div class="bb-home-blog-card__excerpt">
+                            <?= /* @noEscape */ $post->getExcerpt(22) ?>
+                        </div>
+
+                        <a
+                            href="<?= $block->escapeUrl($postUrl) ?>"
+                            class="bb-home-blog-card__link"
+                        >
+                            Read Article
+                            <span aria-hidden="true">→</span>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            <?php endforeach; ?>
+
+        </div>
+
+        <div class="bb-home-blog__footer">
+            <a href="/blog/" class="bb-home-blog__view-all">
+                View All Articles
+                <span aria-hidden="true">→</span>
+            </a>
+        </div>
+
+    </div>
+</section>

@@ -28,12 +28,32 @@
     ->setTemplate('Magento_Cms::homepage/best-selling-fragrances.phtml')
     ->toHtml();
 
-    
-    ?>
+    echo $this->getLayout()
+    ->createBlock(\Magento\Framework\View\Element\Template::class)
+    ->setTemplate('Magento_Cms::homepage/smell-good.phtml')
+    ->toHtml();
 
+    echo $this->getLayout()
+    ->createBlock(\Magento\Framework\View\Element\Template::class)
+    ->setTemplate('Magento_Cms::homepage/makeup-products.phtml')
+    ->toHtml();
+
+     echo $this->getLayout()
+    ->createBlock(\Magento\Framework\View\Element\Template::class)
+    ->setTemplate('Magento_Cms::homepage/some-of-us-prefer.phtml')
+    ->toHtml();
+
+    echo $this->getLayout()
+    ->createBlock(\Magento\Framework\View\Element\Template::class)
+    ->setTemplate('Magento_Cms::homepage/beautiful-section.phtml')
+    ->toHtml();
+?>
+     <?= $block->getLayout()
+    ->createBlock(\BeautyBop\Core\Block\Homepage\LatestPosts::class)
+    ->setTemplate('Magento_Cms::homepage/blog-section.phtml')
+    ->toHtml(); ?>
     
 
-   
 
 </div>
 
