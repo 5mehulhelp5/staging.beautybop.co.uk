@@ -1,0 +1,44 @@
+<?php
+/** @var \BeautyBop\Core\Block\Product\View\Stock $block */
+
+$product = $block->getProduct();
+
+if (!$product) {
+    return;
+}
+
+$qty = (int) floor($block->getSalableQty());
+?>
+
+<div class="bb-product-stock-message">
+
+    <?php if ($qty === 1): ?>
+
+        <div class="bb-product-stock-message__scarce">
+            <span aria-hidden="true">🔥</span>
+            <?= $block->escapeHtml(__('Only 1 left in stock')) ?>
+        </div>
+
+    <?php elseif ($qty >= 2 && $qty <= 5): ?>
+
+        <div class="bb-product-stock-message__scarce">
+            <span aria-hidden="true">🔥</span>
+            <?= $block->escapeHtml(__('Only %1 left in stock', $qty)) ?>
+        </div>
+
+    <?php elseif ($qty >= 6 && $qty <= 10): ?>
+
+        <div class="bb-product-stock-message__low">
+            <?= $block->escapeHtml(__('Low stock')) ?>
+        </div>
+
+    <?php elseif ($qty > 10): ?>
+
+        <div class="bb-product-stock-message__available">
+            <span aria-hidden="true">✓</span>
+            <?= $block->escapeHtml(__('In stock')) ?>
+        </div>
+
+    <?php endif; ?>
+
+</div>

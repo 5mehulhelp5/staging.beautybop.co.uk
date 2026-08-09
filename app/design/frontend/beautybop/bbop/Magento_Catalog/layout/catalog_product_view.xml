@@ -189,7 +189,16 @@
             <block class="Magento\Catalog\Block\Product\View\Additional" name="product.info.additional" as="product_additional_data"/>
         </referenceContainer>
         <referenceBlock name="product.info.addtocart">
-            <block class="Magento\Catalog\Block\ShortcutButtons\InCatalog" name="addtocart.shortcut.buttons"/>
+            <block class="Magento\Catalog\Block\Product\View"
+                name="beautybop.product.at.a.glance"
+                template="Magento_Catalog::product/view/at-a-glance.phtml"
+                after="-" />
+            <block class="BeautyBop\Core\Block\Product\View\Stock"
+                name="beautybop.product.stock.message"
+                template="Magento_Catalog::product/view/stock-message.phtml"
+                before="beautybop.product.at.a.glance" />
+            <block class="Magento\Catalog\Block\ShortcutButtons\InCatalog"
+                name="addtocart.shortcut.buttons"/>
         </referenceBlock>
         <referenceBlock name="product.info.addtocart.additional">
             <block class="Magento\Catalog\Block\ShortcutButtons\InCatalog" name="addtocart.shortcut.buttons.additional"/>
