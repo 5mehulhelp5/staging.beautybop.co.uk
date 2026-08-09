@@ -1,0 +1,78 @@
+<?php
+/** @var \Magento\Catalog\Block\Product\View $block */
+
+$product = $block->getProduct();
+
+$price = (float) $product->getFinalPrice();
+$isInStock = $product->isAvailable();
+
+$freeDeliveryThreshold = 50;
+$amountUntilFreeDelivery = max(0, $freeDeliveryThreshold - $price);
+?>
+
+<div class="bb-product-glance">
+
+    <h3 class="bb-product-glance__title">
+        <?= $block->escapeHtml(__('At a glance')) ?>
+    </h3>
+
+    <div class="bb-product-glance__items">
+
+        <div class="bb-product-glance__item">
+            <span class="bb-product-glance__icon">✓</span>
+
+            <div>
+                <strong>100% Genuine Products</strong>
+                <span>Authentic products from trusted suppliers</span>
+            </div>
+        </div>
+
+        <div class="bb-product-glance__item">
+            <span class="bb-product-glance__icon">🚚</span>
+
+            <div>
+                <?php if ($price >= $freeDeliveryThreshold): ?>
+
+                    <strong>This product qualifies for FREE delivery</strong>
+                    <span>Free UK delivery on this order</span>
+
+                <?php else: ?>
+
+                    <strong>
+                        <?= $block->escapeHtml(
+                            __('Only £%1 away from FREE delivery', number_format($amountUntilFreeDelivery, 2))
+                        ) ?>
+                    </strong>
+
+                    <span>Free UK delivery on orders over £50</span>
+
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="bb-product-glance__item">
+            <span class="bb-product-glance__icon">📦</span>
+
+            <div>
+                <?php if ($isInStock): ?>
+                    <strong>In Stock</strong>
+                    <span>Ready for dispatch</span>
+                <?php else: ?>
+                    <strong>Currently unavailable</strong>
+                    <span>Check back soon</span>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="bb-product-glance__item">
+            <span class="bb-product-glance__icon">🔒</span>
+
+            <div>
+                <strong>Secure Checkout</strong>
+                <span>Safe and secure payment</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>

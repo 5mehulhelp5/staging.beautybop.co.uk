@@ -20,5 +20,94 @@
     margin-bottom: 20px;
 }
 
+/**************************************************
+At a glance section
+**************************************************/
 
+.bb-product-glance {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.bb-product-glance__title {
+    margin: 0 0 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.bb-product-glance__items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 28px;
+}
+
+.bb-product-glance__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.bb-product-glance__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #f7f5f8;
+    font-size: 16px;
+}
+
+.bb-product-glance__item strong {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.bb-product-glance__item span:not(.bb-product-glance__icon) {
+    display: block;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #6b7280;
+}
+
+@media (max-width: 767px) {
+    .bb-product-glance {
+        margin-top: 22px;
+        padding-top: 20px;
+    }
+
+    .bb-product-glance__items {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+
+/******************************************
+Stock message styling
+******************************************/
+
+.bb-product-stock-message {
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.bb-product-stock-message__scarce {
+    color: #b42318;
+}
+
+.bb-product-stock-message__low {
+    color: #b54708;
+}
+
+.bb-product-stock-message__available {
+    color: #18794e;
+}
 
