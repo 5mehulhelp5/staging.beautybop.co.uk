@@ -107,21 +107,33 @@ $items = $order->getAllVisibleItems();
 ?>
 
 <script>
+window.dataLayer = window.dataLayer || [];
+
 window.ga4MagentoPurchase = {
-  transaction_id: "<?= $order->getIncrementId(); ?>",
-  value: <?= number_format($order->getGrandTotal(), 2, '.', '') ?>,
-  currency: "<?= $order->getOrderCurrencyCode(); ?>",
-  items: [
-    <?php foreach ($items as $item): ?>
-    {
-      item_id: "<?= $item->getSku(); ?>",
-      item_name: "<?= addslashes($item->getName()); ?>",
-      price: <?= number_format($item->getPrice(), 2, '.', '') ?>,
-      quantity: <?= (int)$item->getQtyOrdered(); ?>
-    },
-    <?php endforeach; ?>
-  ]
+    transaction_id: "<?= $block->escapeJs($order->getIncrementId()); ?>",
+    value: <?= number_format((float) $order->getGrandTotal(), 2, '.', '') ?>,
+    currency: "<?= $block->escapeJs($order->getOrderCurrencyCode()); ?>",
+    items: [
+        <?php foreach ($items as $item): ?>
+        {
+            item_id: "<?= $block->escapeJs($item->getSku()); ?>",
+            item_name: "<?= $block->escapeJs($item->getName()); ?>",
+            price: <?= number_format((float) $item->getPrice(), 2, '.', '') ?>,
+            quantity: <?= (int) $item->getQtyOrdered(); ?>
+        },
+        <?php endforeach; ?>
+    ]
 };
+
+window.dataLayer.push({
+    event: 'purchase',
+    ecommerce: window.ga4MagentoPurchase
+});
+
+console.log(
+    'GTM purchase pushed:',
+    window.ga4MagentoPurchase
+);
 </script>
 
 <?php endif; ?>

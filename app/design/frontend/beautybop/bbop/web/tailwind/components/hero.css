@@ -30,6 +30,22 @@
     margin-left: calc(50% - 50vw);
 }
 
+@media screen and (min-width: 1920px ) {
+
+    .bb-home-hero-wrapper .bb-home-hero__right img {
+        width: 33%;
+    }
+
+    .bb-home-hero-wrapper .bb-home-hero {
+        background-position: bottom;
+    }
+    
+    .bb-home-hero-slide-2 {
+        background-position: bottom;
+
+    }
+}
+
 .bb-home-hero__content {
     max-width: 1280px;
     margin: 0 auto;
@@ -133,6 +149,7 @@
     .bb-trust-item {
         justify-content: center;
         text-align: center;
-        flex-direction: column;
+        flex-direction: row;
     }
+
 }

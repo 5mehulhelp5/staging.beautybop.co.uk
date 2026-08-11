@@ -14,6 +14,9 @@
 @import "./components/desktop-filter.css";
 @import "./components/pagination.css";
 @import "./components/checkout/checkout-header.css";
+@import "./components/header.css";
+
+
 @import "./components/product-detail.css";
 @import "./components/minicart.css";
 @import "./components/product-listings.css";
@@ -461,15 +464,6 @@ body {
     border-bottom: 1px solid #ece7df;
 }
 
-.bb-trust-bar__container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 32px 48px;
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-}
 
 .bb-trust-item {
     display: flex;
@@ -766,7 +760,7 @@ body {
     .bb-trust-item {
         justify-content: center;
         text-align: center;
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .navigation .parent .level-top:after {

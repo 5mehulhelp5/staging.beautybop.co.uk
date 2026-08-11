@@ -10,24 +10,26 @@ $price = (float) $_product->getFinalPrice();
 
 <script>
 (function () {
-  if (typeof gtag !== 'function') return;
 
-  var sku = "<?= $block->escapeJs($_product->getSku()); ?>";
+    window.dataLayer = window.dataLayer || [];
 
-  if (sessionStorage.getItem('ga4_view_item_sent') === sku) return;
-  sessionStorage.setItem('ga4_view_item_sent', sku);
+    var sku = "<?= $block->escapeJs($_product->getSku()); ?>";
 
-  gtag('event', 'view_item', {
-    currency: "GBP",
-    value: <?= number_format($price, 2, '.', '') ?>,
-    items: [{
-      item_id: "<?= $block->escapeJs($_product->getSku()); ?>",
-      item_name: "<?= $block->escapeJs($_product->getName()); ?>",
-      price: <?= number_format($price, 2, '.', '') ?>,
-      quantity: 1
-    }]
-  });
+    window.dataLayer.push({
+        event: 'view_item',
+        ecommerce: {
+            currency: 'GBP',
+            value: <?= number_format($price, 2, '.', '') ?>,
+            items: [{
+                item_id: "<?= $block->escapeJs($_product->getSku()); ?>",
+                item_name: "<?= $block->escapeJs($_product->getName()); ?>",
+                price: <?= number_format($price, 2, '.', '') ?>,
+                quantity: 1
+            }]
+        }
+    });
 
-  console.log('GA4 (Owned) view_item sent:', sku);
+    console.log('GTM view_item pushed:', sku);
+
 })();
 </script>

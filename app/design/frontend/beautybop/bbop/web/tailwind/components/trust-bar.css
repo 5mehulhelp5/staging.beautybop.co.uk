@@ -9,33 +9,74 @@
 .bb-trust-bar__container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 5px 48px 20px;
+    padding: 15px 48px 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
 }
 
 .bb-trust-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    flex: 1;
 }
 
 .bb-trust-icon {
-    font-size: 24px;
+    width: 36px;
     flex-shrink: 0;
-    width: 30px;
+}
+
+.bb-trust-icon img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.bb-trust-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .bb-trust-content h3 {
     margin: 0;
-    font-size: 14px;
-    font-weight: 600;
+    line-height: 1.2;
+    font-size: 16px;
+    font-weight: 700;
     color: #111827;
 }
 
 .bb-trust-content p {
-    margin: 4px 0 0;
-    font-size: 12px;
+    margin: 3px 0 0;
+    line-height: 1.4;
     color: #6b7280;
+}
+
+
+/*********************************************
+Trust Bar
+*********************************************/
+
+.bb-trust-desktop {
+    display: flex;
+}
+
+.bb-trust-mobile {
+    display: none;
+}
+
+@media (max-width: 1280px) {
+    .bb-trust-bar__container {
+        padding: 15px 0px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .bb-trust-desktop {
+        display: none;
+    }
+
+    .bb-trust-mobile {
+        display: block;
+    }
+
 }
