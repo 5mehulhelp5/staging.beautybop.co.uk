@@ -1,42 +1,66 @@
 <?php
-$_product = $block->getLayout()->getBlock('product.info')->getProduct();
-if (!$_product) return;
+
+$_product = $block->getLayout()
+    ->getBlock('product.info')
+    ->getProduct();
+
+if (!$_product) {
+    return;
+}
+
 $price = (float) $_product->getFinalPrice();
 ?>
 
 <script>
 (function () {
-  function sendAddToCart() {
-    if (typeof gtag !== 'function') return;
 
-    var sku = "<?= $block->escapeJs($_product->getSku()); ?>";
-    var name = "<?= $block->escapeJs($_product->getName()); ?>";
-    var price = <?= number_format($price, 2, '.', '') ?>;
+    function sendAddToCart() {
 
-    gtag('event', 'add_to_cart', {
-      currency: "GBP",
-      value: price,
-      items: [{
-        item_id: sku,
-        item_name: name,
-        price: price,
-        quantity: 1
-      }]
-    });
+        window.dataLayer = window.dataLayer || [];
 
-    console.log('GA4 (Owned) add_to_cart sent:', sku);
-  }
+        var sku = "<?= $block->escapeJs($_product->getSku()); ?>";
+        var name = "<?= $block->escapeJs($_product->getName()); ?>";
+        var price = <?= number_format($price, 2, '.', '') ?>;
 
-  // Bind to Magento's standard add-to-cart button on PDP
-  document.addEventListener('click', function(e){
-    var btn = e.target.closest('#product-addtocart-button, button.tocart');
-    if (!btn) return;
+        window.dataLayer.push({
+            event: 'add_to_cart',
+            ecommerce: {
+                currency: 'GBP',
+                value: price,
+                items: [{
+                    item_id: sku,
+                    item_name: name,
+                    price: price,
+                    quantity: 1
+                }]
+            }
+        });
 
-    // avoid double-fire if button clicked multiple times quickly
-    if (btn.dataset.ga4AtcSent === '1') return;
-    btn.dataset.ga4AtcSent = '1';
+        console.log('GTM add_to_cart pushed:', sku);
+    }
 
-    sendAddToCart();
-  }, true);
+
+    // Bind to Magento's standard add-to-cart button on PDP
+    document.addEventListener('click', function (e) {
+
+        var btn = e.target.closest(
+            '#product-addtocart-button, button.tocart'
+        );
+
+        if (!btn) {
+            return;
+        }
+
+        // Avoid double-fire from rapid multiple clicks
+        if (btn.dataset.ga4AtcSent === '1') {
+            return;
+        }
+
+        btn.dataset.ga4AtcSent = '1';
+
+        sendAddToCart();
+
+    }, true);
+
 })();
 </script>

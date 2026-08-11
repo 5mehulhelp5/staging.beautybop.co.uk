@@ -1,5 +1,4 @@
 define([], function () {
-
     'use strict';
 
     window.addEventListener('load', function () {
@@ -8,13 +7,6 @@ define([], function () {
         const menu    = document.getElementById('bb-mobile-menu');
         const overlay = document.getElementById('bb-mobile-overlay');
         const close   = document.getElementById('bb-mobile-menu-close');
-
-        console.log({
-            toggle,
-            menu,
-            overlay,
-            close
-        });
 
         if (toggle && menu && overlay) {
 
@@ -51,14 +43,13 @@ define([], function () {
 
         }
 
-
-        // search form toggle
+        // Search
         const mobileSearchToggle = document.getElementById('mobile-search-toggle');
         const desktopSearchToggle = document.getElementById('desktop-search-toggle');
 
         const mobileSearchPanel = document.getElementById('mobile-search-panel');
         const desktopSearchPanel = document.getElementById('desktop-search-panel');
-                
+
         if (mobileSearchToggle && mobileSearchPanel) {
 
             mobileSearchToggle.addEventListener('click', function () {
@@ -81,9 +72,10 @@ define([], function () {
 
         }
 
-        document.querySelectorAll('#bb-mobile-menu .parent > a').forEach(link => {
+        // Mobile submenu
+        document.querySelectorAll('#bb-mobile-menu .parent > a').forEach(function (link) {
 
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
 
                 const submenu = this.parentElement.querySelector(':scope > ul');
 
@@ -98,6 +90,23 @@ define([], function () {
             });
 
         });
+
+        // Sticky mobile header
+        const header = document.querySelector('.bb-mobile-header');
+
+        if (header) {
+
+            window.addEventListener('scroll', function () {
+
+                if (window.scrollY > 20) {
+                    header.classList.add('is-fixed');
+                } else {
+                    header.classList.remove('is-fixed');
+                }
+
+            });
+
+        }
 
     });
 
