@@ -341,7 +341,7 @@ return [
         'FME_Banners' => 1,
         'FishPig_WordPress' => 1,
         'BeautyFort_BeautyfortProductImport' => 1,
-        'Meetanshi_CookieNotice' => 1,
+        'Meetanshi_CookieNotice' => 0,
         'Meetanshi_Extensions' => 1,
         'OlegKoval_RegenerateUrlRewrites' => 1,
         'PayPal_Braintree' => 1,
