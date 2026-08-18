@@ -28,4 +28,13 @@
         </arguments>
     </type>
 
+    <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin
+            name="beautybop_in_stock_first_search_sort"
+            type="BeautyBop\Core\Plugin\Product\ToolbarStockSearchSort"
+            sortOrder="10"
+        />
+    </type>
+
+
 </config>
