@@ -90,7 +90,12 @@
 
             <!-- Security -->
             <div class="bb-checkout-assurance__row">
-                <span class="bb-checkout-assurance__large-icon">🔒</span>
+                <span class="bb-checkout-assurance__large-icon">
+                   <img data-bind="attr: {
+                        src: require.toUrl('images/icons/checkout/mingcute_lock-line.svg')
+                    }"
+                    alt="Stripe">
+                </span>
 
                 <div>
                     <strong>We don't store your card details</strong>

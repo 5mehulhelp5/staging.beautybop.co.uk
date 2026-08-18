@@ -38,5 +38,19 @@
         </arguments>
     </type>
 
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+
+                <item name="beautyfort_check_supplier_skus"
+                    xsi:type="object">
+                    BeautyFort\BeautyfortProductImport\Console\Command\CheckSupplierSkus
+                </item>
+
+            </argument>
+        </arguments>
+    </type>
+
+
 </config>
 

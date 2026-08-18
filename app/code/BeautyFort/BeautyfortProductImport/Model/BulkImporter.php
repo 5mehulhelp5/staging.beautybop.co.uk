@@ -354,7 +354,6 @@ class BulkImporter
             'body lotion',
             'body moisturiser',
             'body cream',
-            'shower gel',
             'aftershave balm',
             'hair mist'
         ];

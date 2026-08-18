@@ -84,7 +84,9 @@ class PriceUpdater
                 continue;
             }
 
-            $supplierLookup[$item['StockCode']] = $item;
+            $stockCode = strtoupper(trim((string)$item['StockCode']));
+
+            $supplierLookup[$stockCode] = $item;
         }
 
         $this->logger->info('Supplier lookup built', [
@@ -122,32 +124,99 @@ class PriceUpdater
 
             try {
                 
-                $sku = $product->getSku();
+                $sku = trim((string)$product->getSku());
+                $lookupSku = strtoupper($sku);
 
-                /*if($sku !== 'T240'){
+                /*if($sku !== 'E555202'){
                     continue;
                 }*/
 
                 
-                if (!isset($supplierLookup[$sku])) {
+                if (!isset($supplierLookup[$lookupSku])) {
+
+                    $checkedCount++;
 
                     $this->logger->warning(
-                        'Supplier SKU not found',
+                        'Supplier SKU not found - setting product out of stock',
                         ['sku' => $sku]
                     );
+
+                    try {
+
+                        $stockItem = $this->stockRegistry->getStockItemBySku($sku);
+
+                        $currentQty = (float)$stockItem->getQty();
+                        $currentIsInStock = (bool)$stockItem->getIsInStock();
+
+                        /*
+                        * BeautyFort manages this product but the SKU is not
+                        * present in the current supplier catalogue.
+                        *
+                        * Keep the Magento product itself enabled and retain
+                        * price/content/URL, but make it unavailable to purchase.
+                        */
+                        if ($currentQty != 0 || $currentIsInStock) {
+
+                            $stockItem->setQty(0);
+                            $stockItem->setIsInStock(false);
+
+                            $this->stockRegistry->updateStockItemBySku(
+                                $sku,
+                                $stockItem
+                            );
+
+                            $stockUpdatedCount++;
+                            $updatedCount++;
+
+                            $this->logger->info(
+                                'Missing supplier SKU set out of stock',
+                                [
+                                    'sku' => $sku,
+                                    'old_qty' => $currentQty,
+                                    'new_qty' => 0,
+                                    'old_is_in_stock' => $currentIsInStock,
+                                    'new_is_in_stock' => false
+                                ]
+                            );
+
+                        } else {
+
+                            $unchangedCount++;
+
+                            $this->logger->info(
+                                'Missing supplier SKU already out of stock',
+                                ['sku' => $sku]
+                            );
+                        }
+
+                    } catch (\Throwable $e) {
+
+                        $errorCount++;
+
+                        $this->logger->error(
+                            'Failed setting missing supplier SKU out of stock',
+                            [
+                                'sku' => $sku,
+                                'message' => $e->getMessage()
+                            ]
+                        );
+                    }
 
                     continue;
                 }
 
    
 
-                $supplierData = $supplierLookup[$sku];
+                $supplierData = $supplierLookup[$lookupSku];
 
                 $stockItem = $this->stockRegistry->getStockItemBySku($sku);
 
                 $currentQty = (int)$stockItem->getQty();
 
                 $newQty = (int)($supplierData['StockLevel'] ?? 0);
+
+                $currentIsInStock = (bool)$stockItem->getIsInStock();
+                $newIsInStock = $newQty > 0;
 
                 $this->logger->info('Stock comparison', [
                     'sku' => $sku,
@@ -215,7 +284,7 @@ class PriceUpdater
                 } 
 
 
-                if ($currentQty != $newQty) {
+                if ( $currentQty != $newQty || $currentIsInStock != $newIsInStock) {
                     $hasChanges = true;
                 }
 
@@ -234,10 +303,10 @@ class PriceUpdater
                             $this->productRepository->save($product);
 
                             // update stock if different
-                            if ($currentQty != $newQty) {
+                            if ( $currentQty != $newQty || $currentIsInStock != $newIsInStock ){
 
                                 $stockItem->setQty($newQty);
-                                $stockItem->setIsInStock($newQty > 0);
+                                $stockItem->setIsInStock($newIsInStock);
 
                                 $this->stockRegistry->updateStockItemBySku(
                                     $sku,

@@ -17,10 +17,10 @@ $manageStock = $stockItem->getData('manage_stock');
  
 <?php if ($block->displayProductStockStatus()): ?>
     <?php if ($_product->isAvailable()): ?>
-		<?php if($manageStock == 0 && $stockItem->getQty() == 0): ?>
-			<div class="stock available noqty" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
-				<span><?= /* @escapeNotVerified */ __('Out of stock') ?></span>
-			</div>
+		<?php if ($manageStock == 0 && $stockItem->getQty() == 0): ?>
+        <div class="stock unavailable noqty" title="<?= __('Availability') ?>">
+            <span><?= __('Out of stock') ?></span>
+        </div>
 		<?php else: ?>
         <div class="stock available" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
             <span><?= /* @escapeNotVerified */ __('In stock') ?></span>
