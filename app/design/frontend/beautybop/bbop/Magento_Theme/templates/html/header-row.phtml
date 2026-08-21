@@ -57,17 +57,37 @@
 
                     </div>
 
-                    <div class="account-dropdown absolute right-0 top-full w-40 bg-white shadow-lg border rounded z-50">
+                    <div class="account-dropdown absolute right-0 top-full w-48 bg-white shadow-lg border rounded z-50"
+                        data-role="bb-account-dropdown">
 
-                        <a href="<?= $block->getUrl('customer/account/login') ?>"
-                           class="bb-btn bg-[#000] text-white hover:text-white">
-                            Login
-                        </a>
+                        <div data-role="bb-account-guest">
+                            <a href="<?= $block->getUrl('customer/account/login') ?>"
+                            class="bb-btn bg-[#000] text-white hover:text-white">
+                                Login
+                            </a>
 
-                        <a href="<?= $block->getUrl('customer/account/create') ?>"
-                           class="bb-btn border border-solid border-black hover:text-[#1e1240]">
-                            Register
-                        </a>
+                            <a href="<?= $block->getUrl('customer/account/create') ?>"
+                            class="bb-btn border border-solid border-black hover:text-[#1e1240]">
+                                Register
+                            </a>
+                        </div>
+
+                        <div data-role="bb-account-customer" style="display:none;">
+                            <a href="<?= $block->getUrl('customer/account') ?>"
+                            class="bb-btn bg-[#000] text-white hover:text-white">
+                                My Account
+                            </a>
+
+                            <a href="<?= $block->getUrl('sales/order/history') ?>"
+                            class="bb-btn border border-solid border-black hover:text-[#1e1240]">
+                                My Orders
+                            </a>
+
+                            <a href="<?= $block->getUrl('customer/account/logout') ?>"
+                            class="bb-btn border border-solid border-black hover:text-[#1e1240]">
+                                Sign Out
+                            </a>
+                        </div>
 
                     </div>
 
@@ -188,17 +208,37 @@
 
                     </div>
 
-                    <div class="account-dropdown absolute right-0 top-full w-40 bg-white shadow-lg border rounded z-50">
+                    <div class="account-dropdown absolute right-0 top-full w-48 bg-white shadow-lg border rounded z-50"
+                        data-role="bb-account-dropdown">
 
-                        <a href="<?= $block->getUrl('customer/account/login') ?>"
-                           class="bb-btn bg-[#000] text-white hover:text-white">
-                            Login
-                        </a>
+                        <div data-role="bb-account-guest">
+                            <a href="<?= $block->getUrl('customer/account/login') ?>"
+                            class="bb-btn bg-[#000] text-white hover:text-white">
+                                Login
+                            </a>
 
-                        <a href="<?= $block->getUrl('customer/account/create') ?>"
-                           class="bb-btn border border-solid border-black hover:text-[#1e1240]">
-                            Register
-                        </a>
+                            <a href="<?= $block->getUrl('customer/account/create') ?>"
+                            class="bb-btn border border-solid border-black hover:text-[#1e1240]">
+                                Register
+                            </a>
+                        </div>
+
+                        <div data-role="bb-account-customer" style="display:none;">
+                            <a href="<?= $block->getUrl('customer/account') ?>"
+                            class="bb-btn bg-[#000] text-white hover:text-white">
+                                My Account
+                            </a>
+
+                            <a href="<?= $block->getUrl('sales/order/history') ?>"
+                            class="bb-btn border border-solid border-black hover:text-[#1e1240]">
+                                My Orders
+                            </a>
+
+                            <a href="<?= $block->getUrl('customer/account/logout') ?>"
+                            class="bb-btn border border-solid border-black hover:text-[#1e1240]">
+                                Sign Out
+                            </a>
+                        </div>
 
                     </div>
 
@@ -256,6 +296,30 @@ require([
 
     cart.subscribe(function (updatedCart) {
         updateMobileCartCount(updatedCart);
+    });
+});
+</script>
+
+
+<script>
+require([
+    'jquery',
+    'Magento_Customer/js/customer-data'
+], function ($, customerData) {
+
+    var customer = customerData.get('customer');
+
+    function updateAccountDropdown(data) {
+        var loggedIn = !!(data && data.firstname);
+
+        $('[data-role="bb-account-guest"]').toggle(!loggedIn);
+        $('[data-role="bb-account-customer"]').toggle(loggedIn);
+    }
+
+    updateAccountDropdown(customer());
+
+    customer.subscribe(function (updatedCustomer) {
+        updateAccountDropdown(updatedCustomer);
     });
 });
 </script>

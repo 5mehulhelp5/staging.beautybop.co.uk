@@ -33,5 +33,16 @@
             <block name="customer.data.invalidation.rules" class="Magento\Customer\Block\CustomerScopeData"
                    template="Magento_Customer::js/customer-data/invalidation-rules.phtml"/>
         </referenceContainer>
+
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link"
+                name="customer-account-navigation-logout"
+                after="-">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Sign Out</argument>
+                    <argument name="path" xsi:type="string">customer/account/logout</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
     </body>
 </page>
