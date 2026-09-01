@@ -10,7 +10,6 @@ xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_config
 
 <css src="css/tailwind.css" />
 
-<meta name="robots" content="NOINDEX,NOFOLLOW"/>
 <meta name="format-detection" content="telephone=no"/>
 </head>
 
