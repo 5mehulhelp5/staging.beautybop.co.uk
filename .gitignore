@@ -13,7 +13,8 @@
 /dev/
 notes
 
-
+# Environment-specific robots.txt
+/robots.txt
 # Media (optional - usually excluded)
 pub/media/catalog/product/cache/
 
