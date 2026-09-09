@@ -1,3 +1,152 @@
+<?php
+
+$brandKey = (string) $block->getData('brand_key');
+
+/*
+ * Hugo Boss currently uses the older numeric category layout
+ * which does not yet pass a brand_key.
+ *
+ * Defaulting to Hugo Boss keeps the existing page unchanged.
+ */
+if ($brandKey === '') {
+    $brandKey = 'hugo-boss';
+}
+?>
+
+<?php if ($brandKey === 'calvin-klein'): ?>
+
+<section class="bb-brand-collections bb-brand-collections--calvin-klein">
+    <div class="bb-brand-container">
+
+        <div class="bb-brand-section-heading">
+
+            <h2 class="bb-brand-section-heading__title">
+                Shop Calvin Klein Collections
+            </h2>
+
+            <p class="bb-brand-section-heading__description">
+                Explore our most popular Calvin Klein fragrance ranges
+            </p>
+
+        </div>
+
+        <div class="bb-brand-collections__grid bb-brand-collections__grid--four">
+
+            <!-- CK One -->
+            <a
+                href="<?= $escaper->escapeUrl(
+                    $block->getUrl(
+                        'catalogsearch/result',
+                        ['_query' => ['q' => 'Calvin Klein CK One']]
+                    )
+                ) ?>"
+                class="bb-brand-collection-card bb-brand-collection-card--product"
+            >
+                <div class="bb-brand-collection-card__content">
+                    <h3>CK One</h3>
+                    <span>Fresh &amp; Iconic</span>
+                </div>
+
+                <div class="bb-brand-collection-card__image">
+                    <img
+                        src="<?= $escaper->escapeUrl(
+                            $block->getViewFileUrl(
+                                'images/brands/calvin-klein/ck-one.png'
+                            )
+                        ) ?>"
+                        alt="Calvin Klein CK One"
+                    />
+                </div>
+            </a>
+
+            <!-- Eternity -->
+            <a
+                href="<?= $escaper->escapeUrl(
+                    $block->getUrl(
+                        'catalogsearch/result',
+                        ['_query' => ['q' => 'Calvin Klein Eternity']]
+                    )
+                ) ?>"
+                class="bb-brand-collection-card bb-brand-collection-card--product"
+            >
+                <div class="bb-brand-collection-card__content">
+                    <h3>Eternity</h3>
+                    <span>Timeless everyday fragrance</span>
+                </div>
+
+                <div class="bb-brand-collection-card__image">
+                    <img
+                        src="<?= $escaper->escapeUrl(
+                            $block->getViewFileUrl(
+                                'images/brands/calvin-klein/eternity.png'
+                            )
+                        ) ?>"
+                        alt="Calvin Klein Eternity"
+                    />
+                </div>
+            </a>
+
+            <!-- Obsession -->
+            <a
+                href="<?= $escaper->escapeUrl(
+                    $block->getUrl(
+                        'catalogsearch/result',
+                        ['_query' => ['q' => 'Calvin Klein Obsession']]
+                    )
+                ) ?>"
+                class="bb-brand-collection-card bb-brand-collection-card--product"
+            >
+                <div class="bb-brand-collection-card__content">
+                    <h3>Obsession</h3>
+                    <span>Warm &amp; distinctive</span>
+                </div>
+
+                <div class="bb-brand-collection-card__image">
+                    <img
+                        src="<?= $escaper->escapeUrl(
+                            $block->getViewFileUrl(
+                                'images/brands/calvin-klein/obsession.png'
+                            )
+                        ) ?>"
+                        alt="Calvin Klein Obsession"
+                    />
+                </div>
+            </a>
+
+            <!-- Defy -->
+            <a
+                href="<?= $escaper->escapeUrl(
+                    $block->getUrl(
+                        'catalogsearch/result',
+                        ['_query' => ['q' => 'Calvin Klein Defy']]
+                    )
+                ) ?>"
+                class="bb-brand-collection-card bb-brand-collection-card--product"
+            >
+                <div class="bb-brand-collection-card__content">
+                    <h3>Defy</h3>
+                    <span>Fresh &amp; Iconic</span>
+                </div>
+
+                <div class="bb-brand-collection-card__image">
+                    <img
+                        src="<?= $escaper->escapeUrl(
+                            $block->getViewFileUrl(
+                                'images/brands/calvin-klein/defy.png'
+                            )
+                        ) ?>"
+                        alt="Calvin Klein Defy"
+                    />
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<?php else: ?>
+
 <section class="bb-brand-collections">
     <div class="bb-brand-container">
 
@@ -61,3 +210,5 @@
 
     </div>
 </section>
+
+<?php endif; ?>

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+
+        <attribute
+            name="class"
+            value="beautybop-calvin-klein-landing"
+        />
+
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceBlock name="category.description" remove="true"/>
+        <referenceBlock name="breadcrumbs" remove="true"/>
+        <referenceBlock name="catalog.leftnav" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true"/>
+
+        <referenceContainer name="content">
+
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="beautybop.calvin.klein.hero"
+                template="Magento_Catalog::category/brand/hero.phtml"
+                before="beautybop.calvin.klein.collections"
+            >
+                <arguments>
+
+                    <argument name="eyebrow"
+                              xsi:type="string">Calvin Klein</argument>
+
+                    <argument name="title"
+                              xsi:type="string">Calvin Klein Perfume &amp; Aftershave</argument>
+
+                    <argument name="subtitle"
+                              xsi:type="string">Iconic. Modern. Timeless.</argument>
+
+                    <argument name="description"
+                              xsi:type="string">Shop Calvin Klein fragrances including CK One, Eternity, Obsession and Defy. Clean scents for every style and occasion.</argument>
+
+                    <argument name="primary_label"
+                              xsi:type="string">Shop Fragrances</argument>
+
+                    <argument name="primary_url"
+                              xsi:type="string">brands/calvin-klein-fragrance.html</argument>
+
+                    <argument name="secondary_label"
+                              xsi:type="string">Shop Men's Fragrance</argument>
+
+                    <argument name="secondary_url"
+                              xsi:type="string">brands/calvin-klein-fragrance/mens-fragrance.html</argument>
+
+                </arguments>
+            </block>
+
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="beautybop.calvin.klein.collections"
+                template="Magento_Catalog::category/brand/collections.phtml"
+                before="category.products"
+            >
+                <arguments>
+                    <argument
+                        name="brand_key"
+                        xsi:type="string">calvin-klein</argument>
+                </arguments>
+            </block>
+
+        </referenceContainer>
+
+    </body>
+</page>
