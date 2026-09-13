@@ -1,0 +1,15 @@
+<section class="bb-brand-product-heading">
+    <h2 class="bb-brand-product-heading__title">
+        <?= $escaper->escapeHtml(
+            (string) $block->getData('title')
+        ) ?>
+    </h2>
+
+    <?php if ($block->getData('subtitle')): ?>
+        <p class="bb-brand-product-heading__subtitle">
+            <?= $escaper->escapeHtml(
+                (string) $block->getData('subtitle')
+            ) ?>
+        </p>
+    <?php endif; ?>
+</section>

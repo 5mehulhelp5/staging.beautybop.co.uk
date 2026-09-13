@@ -1,9 +1,46 @@
 <?php
 /**
- * Hugo Boss flagship brand hero
+ * Reusable flagship brand hero.
  *
- * This template will later be made dynamic for all brand categories.
+ * Brand-specific content is supplied through layout XML.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
  */
+
+$eyebrow = trim((string) $block->getData('eyebrow'));
+$title = trim((string) $block->getData('title'));
+$subtitle = trim((string) $block->getData('subtitle'));
+$description = trim((string) $block->getData('description'));
+
+$primaryLabel = trim((string) $block->getData('primary_label'));
+$primaryUrl = trim((string) $block->getData('primary_url'));
+
+$secondaryLabel = trim((string) $block->getData('secondary_label'));
+$secondaryUrl = trim((string) $block->getData('secondary_url'));
+
+$buildUrl = static function (string $url) use ($block): string {
+    if ($url !== '' && str_starts_with($url, '#')) {
+        return $url;
+    }
+
+    return $block->getUrl($url);
+};
+
+/*
+ * Preserve the existing Hugo Boss hero until its layout
+ * is migrated to explicit arguments.
+ */
+$eyebrow = $eyebrow ?: 'Hugo Boss The Brand';
+$title = $title ?: 'Hugo Boss';
+$subtitle = $subtitle ?: 'Timeless Style Refined Fragrances';
+$description = $description ?: 'Discover iconic Hugo Boss aftershaves and perfumes, including Boss Bottled, The Scent and Hugo Man.';
+
+$primaryLabel = $primaryLabel ?: "Shop Men's";
+$primaryUrl = $primaryUrl ?: 'brands/hugo-boss-fragrance/mens-fragrance.html';
+
+$secondaryLabel = $secondaryLabel ?: 'Shop All';
+$secondaryUrl = $secondaryUrl ?: 'brands/hugo-boss-fragrance.html';
 ?>
 
 <section class="bb-brand-hero">
@@ -12,45 +49,46 @@
         <div class="bb-brand-hero__content">
 
             <span class="bb-brand-hero__eyebrow">
-                Hugo Boss The Brand 
+                <?= $escaper->escapeHtml($eyebrow) ?>
             </span>
 
             <h1 class="bb-brand-hero__title">
-                Hugo Boss
+                <?= $escaper->escapeHtml($title) ?>
             </h1>
 
             <p class="bb-brand-hero__sub_title">
-                Timeless Style
-                Refined Fragrances
+                <?= $escaper->escapeHtml($subtitle) ?>
             </p>
 
             <p class="bb-brand-hero__description">
-                Discover iconic Hugo Boss aftershaves and perfumes,
-                including Boss Bottled, The Scent and Hugo Man.
+                <?= $escaper->escapeHtml($description) ?>
             </p>
 
             <div class="bb-brand-hero__actions">
-               <a
-                    href="<?= $escaper->escapeUrl(
-                        $block->getUrl('brands/hugo-boss-fragrance/mens-fragrance.html')
-                    ) ?>"
-                    class="bb-brand-hero__button"
-                >
-                    Shop Men's
-                </a>
 
-                <a
-                    href="/brands/hugo-boss-fragrance.html"
-                    class="bb-brand-hero__button bb-brand-hero__button--outline"
-                >
-                    Shop All
-                </a>
+                <?php if ($primaryLabel && $primaryUrl): ?>
+                    <a
+                        href="<?= $escaper->escapeUrl($buildUrl($primaryUrl)) ?>"
+                        class="bb-brand-hero__button"
+                    >
+                        <?= $escaper->escapeHtml($primaryLabel) ?>
+                    </a>
+                <?php endif; ?>
+
+                <?php if ($secondaryLabel && $secondaryUrl): ?>
+                    <a
+                        href="<?= $escaper->escapeUrl($buildUrl($secondaryUrl)) ?>"
+                        class="bb-brand-hero__button bb-brand-hero__button--outline"
+                    >
+                        <?= $escaper->escapeHtml($secondaryLabel) ?>
+                    </a>
+                <?php endif; ?>
+
             </div>
 
         </div>
 
         <div class="bb-brand-hero__media">
-           
         </div>
 
     </div>

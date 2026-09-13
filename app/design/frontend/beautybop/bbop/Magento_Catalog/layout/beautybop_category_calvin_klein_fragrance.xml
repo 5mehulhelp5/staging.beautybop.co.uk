@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+
+        <attribute
+            name="class"
+            value="beautybop-calvin-klein-landing"
+        />
+
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceBlock name="category.description" remove="true"/>
+        <referenceBlock name="breadcrumbs" remove="true"/>
+        <referenceBlock name="catalog.leftnav" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true"/>
+
+        <referenceContainer name="content">
+
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="beautybop.calvin.klein.hero"
+                template="Magento_Catalog::category/brand/hero.phtml"
+                before="beautybop.calvin.klein.collections"
+            >
+                <arguments>
+
+                    <argument name="eyebrow"
+                              xsi:type="string">Calvin Klein</argument>
+
+                    <argument name="title"
+                              xsi:type="string">Calvin Klein Perfume &amp; Aftershave</argument>
+
+                    <argument name="subtitle"
+                              xsi:type="string">Iconic. Modern. Timeless.</argument>
+
+                    <argument name="description"
+                              xsi:type="string">Shop Calvin Klein fragrances including CK One, Eternity, Obsession and Defy. Clean scents for every style and occasion.</argument>
+
+                    <argument name="primary_label"
+                              xsi:type="string">Shop Fragrances</argument>
+
+                    <argument name="primary_url"
+                              xsi:type="string">#calvin-klein-products</argument>
+
+                    <argument name="secondary_label"
+                              xsi:type="string">Shop Men's Fragrance</argument>
+
+                    <argument name="secondary_url"
+                              xsi:type="string">brands/calvin-klein-fragrance/mens-fragrance.html</argument>
+
+                </arguments>
+            </block>
+
+            <container
+                name="beautybop.calvin.klein.products.anchor"
+                htmlTag="div"
+                htmlId="calvin-klein-products"
+                after="beautybop.calvin.klein.story"
+            >
+                <block
+                    class="Magento\Framework\View\Element\Template"
+                    name="beautybop.calvin.klein.products.heading"
+                    template="Magento_Catalog::category/brand/product-heading.phtml"
+                    before="-"
+                >
+                    <arguments>
+                        <argument name="title" xsi:type="string">
+                            Shop Calvin Klein Fragrance
+                        </argument>
+
+                        <argument name="subtitle" xsi:type="string">
+                            Shop authentic Calvin Klein aftershave and perfume for men and women, with UK delivery from BeautyBop.
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="beautybop.calvin.klein.collections"
+                template="Magento_Catalog::category/brand/collections.phtml"
+                before="category.products"
+            >
+                <arguments>
+                    <argument
+                        name="brand_key"
+                        xsi:type="string">calvin-klein</argument>
+                </arguments>
+            </block>
+
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="beautybop.calvin.klein.story"
+                template="Magento_Catalog::category/brand/story.phtml"
+                after="beautybop.calvin.klein.collections"
+            />
+
+           <container
+                name="beautybop.calvin.klein.guide.faq"
+                htmlTag="section"
+                htmlClass="bb-brand-guide-faq bb-brand-guide-faq--calvin-klein"
+                after="beautybop.calvin.klein.products.anchor"
+            >
+
+                <block
+                    class="Magento\Framework\View\Element\Template"
+                    name="beautybop.calvin.klein.guide.teaser"
+                    template="Magento_Catalog::category/brand/buying-guide-teaser.phtml"
+                >
+                    <arguments>
+
+                        <argument name="title"
+                                xsi:type="string">Calvin Klein Buying Guide</argument>
+
+                        <argument name="description"
+                                xsi:type="string">Find the right Calvin Klein fragrance for you. Explore our guide to the most popular scents, notes and occasions.</argument>
+
+                        <argument name="button_label"
+                                xsi:type="string">Read the Guide</argument>
+
+                        <argument name="button_url"
+                                xsi:type="string">brands/calvin-klein-fragrance.html</argument>
+
+                    </arguments>
+                </block>
+
+
+                <block
+                    class="Magento\Framework\View\Element\Template"
+                    name="beautybop.calvin.klein.faqs"
+                    template="Magento_Catalog::category/brand/faq.phtml"
+                >
+                    <arguments>
+
+                        <argument name="brand_name"
+                                xsi:type="string">Calvin Klein</argument>
+
+                        <argument name="title"
+                                xsi:type="string">Frequently Asked Questions</argument>
+
+                        <argument name="faqs"
+                                xsi:type="array">
+
+                            <item name="authentic"
+                                xsi:type="array">
+
+                                <item name="question"
+                                    xsi:type="string">Are your Calvin Klein fragrances authentic?</item>
+
+                                <item name="answer"
+                                    xsi:type="string">Yes. BeautyBop sells genuine Calvin Klein fragrances sourced from trusted suppliers, including popular ranges such as CK One, Eternity, Obsession and Defy.</item>
+
+                            </item>
+
+                            <item name="gift_sets"
+                                xsi:type="array">
+
+                                <item name="question"
+                                    xsi:type="string">Do you offer Calvin Klein gift sets?</item>
+
+                                <item name="answer"
+                                    xsi:type="string">Yes. Calvin Klein gift sets are available when in stock and can include fragrance alongside complementary body or grooming products.</item>
+
+                            </item>
+
+                            <item name="delivery"
+                                xsi:type="array">
+
+                                <item name="question"
+                                    xsi:type="string">How long does delivery take?</item>
+
+                                <item name="answer"
+                                    xsi:type="string">UK delivery times vary depending on the delivery service selected at checkout. Available delivery options and estimated times are shown before you place your order.</item>
+
+                            </item>
+
+                            <item name="concentration"
+                                xsi:type="array">
+
+                                <item name="question"
+                                    xsi:type="string">What is the difference between Eau de Toilette and Eau de Parfum?</item>
+
+                                <item name="answer"
+                                    xsi:type="string">Eau de Toilette is generally lighter and fresher, while Eau de Parfum usually contains a higher fragrance concentration for a richer scent and greater longevity.</item>
+
+                            </item>
+
+                        </argument>
+
+                    </arguments>
+
+                </block>
+
+            </container>
+
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="beautybop.calvin.klein.buying.guide"
+                template="Magento_Catalog::category/brand/buying-guide.phtml"
+                after="beautybop.calvin.klein.guide.faq"
+            >
+                <arguments>
+
+                    <argument name="brand_name"
+                            xsi:type="string">Calvin Klein</argument>
+
+                    <argument name="title"
+                            xsi:type="string">Calvin Klein Fragrance Buying Guide</argument>
+
+                    <argument name="intro"
+                            xsi:type="string">Compare popular Calvin Klein fragrances and find a scent that suits your style, occasion and preferred fragrance profile.</argument>
+
+                    <argument name="fragrances"
+                            xsi:type="array">
+
+                        <item name="ck_one"
+                            xsi:type="array">
+                            <item name="name"
+                                xsi:type="string">CK One</item>
+                            <item name="description"
+                                xsi:type="string">A fresh and clean unisex fragrance with a light citrus and aromatic character.</item>
+                            <item name="best_for"
+                                xsi:type="string">Everyday wear, daytime and warmer weather</item>
+                            <item name="notes"
+                                xsi:type="string">Citrus, green tea and soft woods</item>
+                        </item>
+
+                        <item name="eternity"
+                            xsi:type="array">
+                            <item name="name"
+                                xsi:type="string">Eternity</item>
+                            <item name="description"
+                                xsi:type="string">A classic Calvin Klein fragrance with a clean, aromatic and refined character.</item>
+                            <item name="best_for"
+                                xsi:type="string">Work, everyday wear and smart occasions</item>
+                            <item name="notes"
+                                xsi:type="string">Aromatic herbs, florals and woods</item>
+                        </item>
+
+                        <item name="obsession"
+                            xsi:type="array">
+                            <item name="name"
+                                xsi:type="string">Obsession</item>
+                            <item name="description"
+                                xsi:type="string">A warm and distinctive fragrance with a richer, more intense character.</item>
+                            <item name="best_for"
+                                xsi:type="string">Evenings, colder weather and special occasions</item>
+                            <item name="notes"
+                                xsi:type="string">Spices, amber and warm woods</item>
+                        </item>
+
+                        <item name="defy"
+                            xsi:type="array">
+                            <item name="name"
+                                xsi:type="string">Defy</item>
+                            <item name="description"
+                                xsi:type="string">A modern Calvin Klein fragrance combining fresh and woody elements.</item>
+                            <item name="best_for"
+                                xsi:type="string">Everyday wear, evenings and modern casual style</item>
+                            <item name="notes"
+                                xsi:type="string">Fresh citrus, aromatic notes and woods</item>
+                        </item>
+
+                    </argument>
+
+                    <argument name="recommendations"
+                            xsi:type="array">
+
+                        <item name="fresh"
+                            xsi:type="array">
+                            <item name="style"
+                                xsi:type="string">Fresh and clean</item>
+                            <item name="range"
+                                xsi:type="string">CK One</item>
+                        </item>
+
+                        <item name="classic"
+                            xsi:type="array">
+                            <item name="style"
+                                xsi:type="string">Classic and versatile</item>
+                            <item name="range"
+                                xsi:type="string">Eternity</item>
+                        </item>
+
+                        <item name="warm"
+                            xsi:type="array">
+                            <item name="style"
+                                xsi:type="string">Warm and distinctive</item>
+                            <item name="range"
+                                xsi:type="string">Obsession</item>
+                        </item>
+
+                        <item name="modern"
+                            xsi:type="array">
+                            <item name="style"
+                                xsi:type="string">Modern and woody</item>
+                            <item name="range"
+                                xsi:type="string">Defy</item>
+                        </item>
+
+                    </argument>
+
+                    <argument name="edt_description"
+                            xsi:type="string">A lighter fragrance concentration that is often well suited to daytime, everyday wear and warmer weather.</argument>
+
+                    <argument name="edp_description"
+                            xsi:type="string">A richer fragrance concentration that usually offers greater depth and can be better suited to evenings and cooler weather.</argument>
+
+                </arguments>
+            </block>
+
+        </referenceContainer>
+
+        <move
+            element="category.products"
+            destination="beautybop.calvin.klein.products.anchor"
+        />
+
+    </body>
+</page>
