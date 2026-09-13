@@ -68,7 +68,7 @@
                 >
                     <arguments>
                         <argument name="title" xsi:type="string">
-                            Shop Calvin Klein Fragrance
+                            Shop Calvin Klein Fragrance and Aftershave
                         </argument>
 
                         <argument name="subtitle" xsi:type="string">
@@ -116,7 +116,7 @@
                                 xsi:type="string">Calvin Klein Buying Guide</argument>
 
                         <argument name="description"
-                                xsi:type="string">Find the right Calvin Klein fragrance for you. Explore our guide to the most popular scents, notes and occasions.</argument>
+                                xsi:type="string">Explore best-selling Calvin Klein perfumes including CK One, Eternity and Obsession, some of the most recognised designer fragrances worldwide.</argument>
 
                         <argument name="button_label"
                                 xsi:type="string">Read the Guide</argument>
