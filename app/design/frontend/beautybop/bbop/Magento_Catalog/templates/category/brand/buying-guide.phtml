@@ -24,8 +24,17 @@ if (!$title && $brandName) {
 ?>
 
 <?php if ($brandName): ?>
-<section class="brand-buying-guide"
-         aria-labelledby="brand-buying-guide-title">
+<?php
+$guideId = strtolower(
+    preg_replace('/[^a-z0-9]+/i', '-', trim($brandName))
+) . '-buying-guide';
+?>
+
+<section
+    id="<?= $escaper->escapeHtmlAttr($guideId) ?>"
+    class="brand-buying-guide"
+    aria-labelledby="brand-buying-guide-title"
+>
 
     <div class="brand-buying-guide__container">
 

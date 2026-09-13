@@ -1,0 +1,72 @@
+<?php
+/**
+ * Compact brand buying guide teaser.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$title = trim((string) $block->getData('title'));
+$description = trim((string) $block->getData('description'));
+$buttonLabel = trim((string) $block->getData('button_label'));
+$buttonUrl = trim((string) $block->getData('button_url'));
+?>
+
+<div class="bb-brand-guide-card">
+
+    <div class="bb-brand-guide-card__content">
+
+        <h2 class="bb-brand-guide-card__title">
+            <?= $escaper->escapeHtml($title) ?>
+        </h2>
+
+        <p class="bb-brand-guide-card__description">
+            <?= $escaper->escapeHtml($description) ?>
+        </p>
+
+        <?php if ($buttonLabel && $buttonUrl): ?>
+           <a
+                href="#calvin-klein-buying-guide"
+                class="bb-brand-guide-card__button"
+            >
+                <?= $escaper->escapeHtml($buttonLabel) ?>
+            </a>
+        <?php endif; ?>
+
+    </div>
+
+    <div class="bb-brand-guide-card__products" aria-hidden="true">
+
+        <img
+            src="<?= $escaper->escapeUrl(
+                $block->getViewFileUrl(
+                    'images/brands/calvin-klein/ck-one.png'
+                )
+            ) ?>"
+            alt=""
+            loading="lazy"
+        >
+
+        <img
+            src="<?= $escaper->escapeUrl(
+                $block->getViewFileUrl(
+                    'images/brands/calvin-klein/eternity.png'
+                )
+            ) ?>"
+            alt=""
+            loading="lazy"
+        >
+
+        <img
+            src="<?= $escaper->escapeUrl(
+                $block->getViewFileUrl(
+                    'images/brands/calvin-klein/defy.png'
+                )
+            ) ?>"
+            alt=""
+            loading="lazy"
+        >
+
+    </div>
+
+</div>

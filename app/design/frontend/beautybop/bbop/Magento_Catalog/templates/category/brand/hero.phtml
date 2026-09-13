@@ -19,6 +19,14 @@ $primaryUrl = trim((string) $block->getData('primary_url'));
 $secondaryLabel = trim((string) $block->getData('secondary_label'));
 $secondaryUrl = trim((string) $block->getData('secondary_url'));
 
+$buildUrl = static function (string $url) use ($block): string {
+    if ($url !== '' && str_starts_with($url, '#')) {
+        return $url;
+    }
+
+    return $block->getUrl($url);
+};
+
 /*
  * Preserve the existing Hugo Boss hero until its layout
  * is migrated to explicit arguments.
@@ -60,7 +68,7 @@ $secondaryUrl = $secondaryUrl ?: 'brands/hugo-boss-fragrance.html';
 
                 <?php if ($primaryLabel && $primaryUrl): ?>
                     <a
-                        href="<?= $escaper->escapeUrl($block->getUrl($primaryUrl)) ?>"
+                        href="<?= $escaper->escapeUrl($buildUrl($primaryUrl)) ?>"
                         class="bb-brand-hero__button"
                     >
                         <?= $escaper->escapeHtml($primaryLabel) ?>
@@ -69,7 +77,7 @@ $secondaryUrl = $secondaryUrl ?: 'brands/hugo-boss-fragrance.html';
 
                 <?php if ($secondaryLabel && $secondaryUrl): ?>
                     <a
-                        href="<?= $escaper->escapeUrl($block->getUrl($secondaryUrl)) ?>"
+                        href="<?= $escaper->escapeUrl($buildUrl($secondaryUrl)) ?>"
                         class="bb-brand-hero__button bb-brand-hero__button--outline"
                     >
                         <?= $escaper->escapeHtml($secondaryLabel) ?>

@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .catalog-category-view .category-description h2 {
     margin: 0 0 16px;
     font-size: 28px;
@@ -38,7 +42,7 @@ Hero image banner
     background-color: #eee8df;
     background-image: url('../images/brands/calvin-klein/calvin-klein-hero.jpg');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: revert-rule;
     background-size: cover;
 }
 
@@ -543,51 +547,64 @@ Calvin Klein Collection Cards
 **********************************/
 
 .bb-brand-collections--calvin-klein {
-    padding: 64px 0;
+    padding: 56px 0 64px;
 }
 
 .bb-brand-collections--calvin-klein .bb-brand-section-heading {
     max-width: none;
-    margin-bottom: 32px;
+    margin-bottom: 38px;
     text-align: center;
 }
 
 .bb-brand-collections--calvin-klein .bb-brand-section-heading__title {
-    margin-bottom: 12px;
+    margin: 0 0 12px;
     font-size: 32px;
+    line-height: 1.2;
     font-weight: 600;
+    color: #151515;
 }
 
 .bb-brand-collections--calvin-klein .bb-brand-section-heading__description {
+    margin: 0;
     font-size: 14px;
+    line-height: 1.6;
     letter-spacing: 1px;
     color: #697386;
 }
 
 /* Four cards across */
 .bb-brand-collections--calvin-klein .bb-brand-collections__grid {
+    display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
 }
 
-/* Override the Hugo Boss card styles */
+/* Calvin Klein card styling */
 .bb-brand-collections--calvin-klein .bb-brand-collection-card {
-    min-height: 175px;
-    padding: 20px 10px 20px 18px;
+    min-height: 190px;
+    padding: 20px 18px 20px 24px;
 
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 48%;
+    grid-template-columns: minmax(0, 1fr) 46%;
     align-items: center;
+    gap: 10px;
 
     background: #f5f5f5;
     background-image: none;
 
     color: #151515;
+    text-decoration: none;
+
     overflow: hidden;
     border-radius: 8px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
 }
 
-/* Explicitly kill Hugo Boss nth-child backgrounds */
+/* Explicitly override Hugo Boss nth-child backgrounds */
 .bb-brand-collections--calvin-klein .bb-brand-collection-card:nth-child(1),
 .bb-brand-collections--calvin-klein .bb-brand-collection-card:nth-child(2),
 .bb-brand-collections--calvin-klein .bb-brand-collection-card:nth-child(3),
@@ -596,38 +613,52 @@ Calvin Klein Collection Cards
     background-color: #f5f5f5;
 }
 
+/* Subtle desktop hover */
+.bb-brand-collections--calvin-klein .bb-brand-collection-card:hover {
+    background-color: #f1f1f1;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
 /* Text */
 .bb-brand-collections--calvin-klein
 .bb-brand-collection-card__content {
     position: relative;
     z-index: 2;
+    min-width: 0;
 }
 
 .bb-brand-collections--calvin-klein
 .bb-brand-collection-card h3 {
     margin: 0 0 10px;
+
     font-size: 18px;
-    line-height: 1.2;
+    line-height: 1.25;
     font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+
     color: #151515;
 }
 
 .bb-brand-collections--calvin-klein
 .bb-brand-collection-card__content span {
     display: block;
-    max-width: 120px;
+    max-width: 125px;
+
     font-size: 12px;
     line-height: 1.45;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
+
     color: #151515;
 }
 
 /* Product image */
 .bb-brand-collections--calvin-klein
 .bb-brand-collection-card__image {
-    height: 150px;
+    width: 100%;
+    height: 170px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -636,9 +667,12 @@ Calvin Klein Collection Cards
 .bb-brand-collections--calvin-klein
 .bb-brand-collection-card__image img {
     display: block;
+
     width: 100%;
     height: 100%;
+
     object-fit: contain;
+    object-position: center;
 }
 
 /* Tablet */
@@ -646,6 +680,11 @@ Calvin Klein Collection Cards
     .bb-brand-collections--calvin-klein
     .bb-brand-collections__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bb-brand-collections--calvin-klein
+    .bb-brand-collection-card {
+        min-height: 180px;
     }
 }
 
@@ -656,8 +695,19 @@ Calvin Klein Collection Cards
     }
 
     .bb-brand-collections--calvin-klein
+    .bb-brand-section-heading {
+        margin-bottom: 28px;
+    }
+
+    .bb-brand-collections--calvin-klein
     .bb-brand-section-heading__title {
         font-size: 28px;
+    }
+
+    .bb-brand-collections--calvin-klein
+    .bb-brand-section-heading__description {
+        font-size: 13px;
+        line-height: 1.5;
     }
 
     .bb-brand-collections--calvin-klein
@@ -669,11 +719,400 @@ Calvin Klein Collection Cards
     .bb-brand-collections--calvin-klein
     .bb-brand-collection-card {
         min-height: 160px;
-        grid-template-columns: 1fr 45%;
+        padding: 18px 16px 18px 20px;
+
+        grid-template-columns: minmax(0, 1fr) 45%;
+        gap: 8px;
     }
 
     .bb-brand-collections--calvin-klein
     .bb-brand-collection-card__image {
         height: 135px;
+    }
+
+    .bb-brand-collections--calvin-klein
+    .bb-brand-collection-card h3 {
+        font-size: 17px;
+    }
+
+    .bb-brand-collections--calvin-klein
+    .bb-brand-collection-card__content span {
+        font-size: 11px;
+        max-width: 115px;
+    }
+
+    .bb-brand-collections--calvin-klein
+    .bb-brand-collection-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+
+/* ============================================
+Calvin Klein Brand Story
+==============================================*/
+
+.bb-brand-story {
+    width: 100vw;
+    max-width: none;
+
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 48px;
+
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+
+    background: #eeeeee;
+}
+
+.bb-brand-story__media {
+    min-height: 310px;
+}
+
+.bb-brand-story__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.bb-brand-story__content {
+    padding: 42px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bb-brand-story__content h2 {
+    margin: 0 0 16px;
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 600;
+    color: #151515;
+}
+
+.bb-brand-story__content p {
+    margin: 0 0 22px;
+    max-width: 520px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.bb-brand-story__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-width: 150px;
+    padding: 11px 18px;
+
+    border: 1px solid #333;
+    color: #151515;
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.bb-brand-story__cta:hover {
+    background: #151515;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .bb-brand-story {
+        grid-template-columns: 1fr;
+         margin-top: 36px;
+    }
+
+    .bb-brand-story__media {
+        min-height: 240px;
+    }
+
+    .bb-brand-story__content {
+        padding: 28px 24px 32px;
+    }
+
+    .bb-brand-story__content h2 {
+        font-size: 24px;
+    }
+}
+
+/**********************************
+Brand Buying Guide + FAQ
+**********************************/
+
+.bb-brand-guide-faq {
+    width: min(100% - 40px, 1400px);
+    margin: 72px auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 64px;
+    align-items: stretch;
+}
+
+
+/* Buying guide card */
+
+.bb-brand-guide-card {
+    position: relative;
+    min-height: 340px;
+    padding: 48px;
+
+    display: grid;
+    grid-template-columns: 1fr 48%;
+    align-items: center;
+
+    background: #f4f4f4;
+    overflow: hidden;
+}
+
+.bb-brand-guide-card__content {
+    position: relative;
+    z-index: 2;
+}
+
+.bb-brand-guide-card__title {
+    margin: 0 0 18px;
+
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 600;
+
+    color: #151515;
+}
+
+.bb-brand-guide-card__description {
+    max-width: 370px;
+    margin: 0 0 28px;
+
+    font-size: 15px;
+    line-height: 1.65;
+
+    color: #444;
+}
+
+.bb-brand-guide-card__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 145px;
+    padding: 12px 20px;
+
+    background: #111827;
+    color: #fff;
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.bb-brand-guide-card__button:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+/* Bottle arrangement */
+
+.bb-brand-guide-card__products {
+    position: relative;
+    height: 270px;
+}
+
+.bb-brand-guide-card__products img {
+    position: absolute;
+    bottom: 0;
+
+    max-height: 235px;
+    width: auto;
+
+    object-fit: contain;
+}
+
+.bb-brand-guide-card__products img:nth-child(1) {
+    left: 0;
+    z-index: 1;
+    transform: scale(.88);
+}
+
+.bb-brand-guide-card__products img:nth-child(2) {
+    left: 31%;
+    z-index: 3;
+}
+
+.bb-brand-guide-card__products img:nth-child(3) {
+    right: 0;
+    z-index: 2;
+    transform: scale(.9);
+}
+
+
+/* Existing FAQ inside new layout */
+
+.bb-brand-guide-faq .brand-faq {
+    padding: 0;
+    background: transparent;
+}
+
+.bb-brand-guide-faq .brand-faq__container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+.bb-brand-guide-faq .brand-faq__eyebrow,
+.bb-brand-guide-faq .brand-faq__intro {
+    display: none;
+}
+
+.bb-brand-guide-faq .brand-faq__header {
+    margin-bottom: 24px;
+}
+
+.bb-brand-guide-faq .brand-faq__title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .bb-brand-guide-faq {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .bb-brand-guide-faq {
+        width: min(100% - 32px, 1400px);
+        margin: 48px auto;
+    }
+
+    .bb-brand-guide-card {
+        min-height: auto;
+        padding: 32px 24px 0;
+        grid-template-columns: 1fr;
+    }
+
+    .bb-brand-guide-card__products {
+        height: 230px;
+        margin-top: 24px;
+    }
+
+    .bb-brand-guide-card__title,
+    .bb-brand-guide-faq .brand-faq__title {
+        font-size: 26px;
+    }
+}
+
+#calvin-klein-buying-guide {
+    scroll-margin-top: 120px;
+}
+
+#calvin-klein-products {
+    scroll-margin-top: 120px;
+}
+
+.bb-brand-product-heading {
+    text-align: center;
+    padding: 48px 20px 32px;
+}
+
+.bb-brand-product-heading__title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111827;
+}
+
+.bb-brand-product-heading__subtitle {
+    margin: 12px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+}
+
+@media (max-width: 767px) {
+
+    .beautybop-calvin-klein-landing .bb-brand-hero {
+        background-image:
+            url('../images/brands/calvin-klein/calvin-klein-mobile-small-bg-edited.png');
+
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+    }
+    
+    .beautybop-calvin-klein-landing .bb-brand-hero__inner {
+        width: 100%;
+        min-height: 680px;
+        display: block;
+        padding: 28px 20px 32px;
+    }
+
+    .beautybop-calvin-klein-landing .bb-brand-hero__content {
+        max-width: 100%;
+    }
+
+    .beautybop-calvin-klein-landing .bb-brand-hero__eyebrow {
+        margin-bottom: 10px;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+    }
+
+    .beautybop-calvin-klein-landing .bb-brand-hero__title {
+        max-width: 280px;
+        margin-bottom: 18px;
+        font-size: 34px;
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+    }
+
+    .beautybop-calvin-klein-landing .bb-brand-hero__sub_title {
+        max-width: 280px;
+        margin-bottom: 14px;
+        font-size: 18px;
+        line-height: 1.25;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+    }
+
+    .beautybop-calvin-klein-landing .bb-brand-hero__description {
+        max-width: 275px;
+        margin-bottom: 24px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #444;
+    }
+
+    .beautybop-calvin-klein-landing .bb-brand-hero__actions {
+        gap: 10px;
+    }
+
+    .beautybop-calvin-klein-landing .bb-brand-hero__button {
+        min-height: 46px;
+        padding: 0 22px;
+        font-size: 14px;
     }
 }
