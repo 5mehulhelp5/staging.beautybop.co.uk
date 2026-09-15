@@ -3,8 +3,21 @@
     margin-left: calc(50% - 50vw);
 }
 
-.bb-home-hero {
+
+/* Keep hero stable before Swiper initialises */
+.bb-home-carousel-slider-show:not(.swiper-initialized) .swiper-wrapper {
+    display: flex;
     width: 100%;
+}
+
+.bb-home-carousel-slider-show:not(.swiper-initialized) .swiper-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+}
+
+.bb-home-carousel-slider-show:not(.swiper-initialized) .swiper-slide:not(:first-child) {
+    display: none;
 }
 
 .bb-home-hero {
@@ -15,8 +28,7 @@
     min-height: 550px;
     display: flex;
     align-items: center;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
+    width: 100%;
 }
 
 .bb-home-hero-slide-2 {
@@ -27,8 +39,7 @@
     min-height: 550px;
     display: flex;
     align-items: center;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
+    width: 100%;
 }
 
 
