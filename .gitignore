@@ -74,3 +74,6 @@ app/etc/env.php
 
 # Local Mailchimp exports
 beautybop-mailchimp-clean-*.csv
+
+# Temporary development backup files
+*.before-*

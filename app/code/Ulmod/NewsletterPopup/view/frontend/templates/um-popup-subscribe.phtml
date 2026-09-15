@@ -14,10 +14,19 @@ $modelConfig = $block->getConfigModel();
     <div class="bb-newsletter-popup">
 
         <div class="bb-newsletter-popup__image">
-            <img
-                src="<?= $block->getViewFileUrl('images/newsletter/newsletter-popup.png') ?>"
-                alt="BeautyBop fragrance offers and new arrivals"
-            >
+            <picture>
+                <source
+                    srcset="<?= $block->getViewFileUrl('images/newsletter/newsletter-popup.webp') ?>"
+                    type="image/webp"
+                />
+
+                <img
+                    src="<?= $block->getViewFileUrl('images/newsletter/newsletter-popup.jpg') ?>"
+                    alt="BeautyBop fragrance offers and new arrivals"
+                    width="800"
+                    height="640"
+                />
+            </picture>
         </div>
 
         <div class="bb-newsletter-popup__content">
