@@ -177,10 +177,6 @@ input[type="password"] {
     display:none !important;
 }
 
-.navigation .level0.parent {
-    position: relative;
-}
-
 /* replace basket icon */
 .action.showcart:before {
     display: none !important;
@@ -658,13 +654,6 @@ body {
 #bb-mobile-menu .ui-menu-icon,
 #bb-mobile-menu .submenu-toggle {
     display: none !important;
-}
-
-@media (min-width: 1920px) {
-    .navigation .level0.parent > ul.level0.level-top {
-        transform: translateX(-47%);
-        min-width: 1920px;
-    }
 }
 
 /* Hero banner */
